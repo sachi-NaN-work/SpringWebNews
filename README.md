@@ -29,24 +29,24 @@ Spring Boot 3.5 / Java 21 / WebFlux で構成した、ニュースサイトの�
 
 ### ＜ README ファイル一式 ＞
 
-| No | ファイル                                            | 内容               | 人事担当者向け－事前確認の優先度 | 技術担当者向け－事前確認の優先度 |
-|:--:|-------------------------------------------------|------------------|:----------------:|:----------------:|
-| 1  | [01_README.md](document/00_README/01_README.md) | 開発背景・経緯          |    **（ 2 ）**     |    **（ 4 ）**     |
-| 2  | [02_README.md](document/00_README/02_README.md) | アプリ機能概要          |    **（ 2 ）**     |    **（ 4 ）**     |
-| 3  | [03_README.md](document/00_README/03_README.md) | 技術スタック           |        -         |        -         |
-| 4  | [04_README.md](document/00_README/04_README.md) | リポジトリの主要ディレクトリ   |        -         |        -         |
-| 5  | [05_README.md](document/00_README/05_README.md) | 前提               |        -         |        -         |
-| 6  | [06_README.md](document/00_README/06_README.md) | 起動 / 停止手順        |        -         |        -         |
-| 7  | [07_README.md](document/00_README/07_README.md) | アクセス先            |        -         |        -         |
-| 8  | [08_README.md](document/00_README/08_README.md) | ローカルでアプリだけ起動する   |        -         |        -         |
-| 9  | [09_README.md](document/00_README/09_README.md) | 初期データ            |        -         |        -         |
-| 10 | [10_README.md](document/00_README/10_README.md) | 管理画面操作と対応ロール     |        -         |        -         |
-| 11 | [11_README.md](document/00_README/11_README.md) | モデルファイルの扱い       |        -         |        -         |
-| 12 | [12_README.md](document/00_README/12_README.md) | 主な API / エンドポイント |        -         |        -         |
-| 13 | [13_README.md](document/00_README/13_README.md) | 外部設定             |        -         |        -         |
-| 14 | [14_README.md](document/00_README/14_README.md) | 学習モデル            |        -         |        -         |
-| 15 | [15_README.md](document/00_README/15_README.md) | 今後の改善・追加予定       |        -         |    **（ 2 ）**     |
-| 16 | [16_README.md](document/00_README/16_README.md) | 本開発による経験         |        -         |    **（ 4 ）**     |
+| No | ファイル                                            | 内容               | 人事担当者向け<br/>優先度 | 技術担当者向け<br/>優先度 |
+|:--:|-------------------------------------------------|------------------|:---------------:|:---------------:|
+| 1  | [01_README.md](document/00_README/01_README.md) | 開発背景・経緯          |    **（ 2 ）**    |    **（ 4 ）**    |
+| 2  | [02_README.md](document/00_README/02_README.md) | アプリ機能概要          |    **（ 2 ）**    |    **（ 4 ）**    |
+| 3  | [03_README.md](document/00_README/03_README.md) | 技術スタック           |        -        |        -        |
+| 4  | [04_README.md](document/00_README/04_README.md) | リポジトリの主要ディレクトリ   |        -        |        -        |
+| 5  | [05_README.md](document/00_README/05_README.md) | 前提               |        -        |        -        |
+| 6  | [06_README.md](document/00_README/06_README.md) | 起動 / 停止手順        |        -        |        -        |
+| 7  | [07_README.md](document/00_README/07_README.md) | アクセス先            |        -        |        -        |
+| 8  | [08_README.md](document/00_README/08_README.md) | ローカルでアプリだけ起動する   |        -        |        -        |
+| 9  | [09_README.md](document/00_README/09_README.md) | 初期データ            |        -        |        -        |
+| 10 | [10_README.md](document/00_README/10_README.md) | 管理画面操作と対応ロール     |        -        |        -        |
+| 11 | [11_README.md](document/00_README/11_README.md) | モデルファイルの扱い       |        -        |        -        |
+| 12 | [12_README.md](document/00_README/12_README.md) | 主な API / エンドポイント |        -        |        -        |
+| 13 | [13_README.md](document/00_README/13_README.md) | 外部設定             |        -        |        -        |
+| 14 | [14_README.md](document/00_README/14_README.md) | 学習モデル            |        -        |        -        |
+| 15 | [15_README.md](document/00_README/15_README.md) | 今後の改善・追加予定       |        -        |    **（ 2 ）**    |
+| 16 | [16_README.md](document/00_README/16_README.md) | 本開発による経験         |        -        |    **（ 4 ）**    |
 
 
 <br>
@@ -54,12 +54,12 @@ Spring Boot 3.5 / Java 21 / WebFlux で構成した、ニュースサイトの�
 
 ### ＜ フロー図 ファイル一式 ＞
 
-| No | ファイル                                              | 内容         | 人事担当者向け－事前確認の優先度 | 技術担当者向け－事前確認の優先度 |
-|:--:|---------------------------------------------------|------------|:----------------:|:----------------:|
-| 1  | [01_処理フロー.md](document/01_フロー図/01_処理フロー.md)       | 処理フロー      |        -         |        -         |
-| 2  | [02_画面遷移フロー.md](document/01_フロー図/02_画面遷移フロー.md)   | 画面遷移フロー    |        -         |        -         |
-| 3  | [03_推薦フロー.md](document/01_フロー図/03_推薦フロー.md)       | 推薦処理フロー    |        -         |        -         |
-| 4  | [04_学習モデルフロー.md](document/01_フロー図/04_学習モデルフロー.md) | 学習モデル処理フロー |        -         |        -         |
+| No | ファイル                                              | 内容         | 人事担当者向け<br/>優先度 | 技術担当者向け<br/>優先度 |
+|:--:|---------------------------------------------------|------------|:---------------:|:---------------:|
+| 1  | [01_処理フロー.md](document/01_フロー図/01_処理フロー.md)       | 処理フロー      |        -        |        -        |
+| 2  | [02_画面遷移フロー.md](document/01_フロー図/02_画面遷移フロー.md)   | 画面遷移フロー    |        -        |        -        |
+| 3  | [03_推薦フロー.md](document/01_フロー図/03_推薦フロー.md)       | 推薦処理フロー    |        -        |        -        |
+| 4  | [04_学習モデルフロー.md](document/01_フロー図/04_学習モデルフロー.md) | 学習モデル処理フロー |        -        |        -        |
 
 
 <br>
@@ -67,16 +67,16 @@ Spring Boot 3.5 / Java 21 / WebFlux で構成した、ニュースサイトの�
 
 ### ＜ 設計 ファイル一式 ＞
 
-| No | ファイル                                                    | 内容                | 人事担当者向け－事前確認の優先度 | 技術担当者向け－事前確認の優先度 |
-|:--:|---------------------------------------------------------|-------------------|:----------------:|:----------------:|
-| 1  | [01_要件定義.md](document/02_設計/01_要件定義.md)                 | 要件定義              |        -         |        -         |
-| 2  | [02_基本設計.md](document/02_設計/02_基本設計.md)                 | 基本設計              |        -         |        -         |
-| 3  | [03_詳細設計.md](document/02_設計/03_詳細設計.md)                 | 詳細設計              |        -         |        -         |
-| 4  | [04_PostgreSQL設計.md](document/02_設計/04_PostgreSQL設計.md) | DB 設計（PostgreSQL） |        -         |        -         |
-| 5  | [05_Redis設計.md](document/02_設計/05_Redis設計.md)           | DB 設計（Redis）      |        -         |        -         |
-| 6  | [06_画面設計.md](document/02_設計/06_画面設計.md)                 | 画面設計              |        -         |        -         |
-| 7  | [07_推薦設計.md](document/02_設計/07_推薦設計.md)                 | 推薦値の仕様            |        -         |        -         |
-| 8  | [08_学習モデル設計.md](document/02_設計/08_学習モデル設計.md)           | 学習モデルの仕様          |        -         |        -         |
+| No | ファイル                                                    | 内容                | 人事担当者向け<br/>優先度 | 技術担当者向け<br/>優先度 |
+|:--:|---------------------------------------------------------|-------------------|:---------------:|:---------------:|
+| 1  | [01_要件定義.md](document/02_設計/01_要件定義.md)                 | 要件定義              |        -        |        -        |
+| 2  | [02_基本設計.md](document/02_設計/02_基本設計.md)                 | 基本設計              |        -        |        -        |
+| 3  | [03_詳細設計.md](document/02_設計/03_詳細設計.md)                 | 詳細設計              |        -        |        -        |
+| 4  | [04_PostgreSQL設計.md](document/02_設計/04_PostgreSQL設計.md) | DB 設計（PostgreSQL） |        -        |        -        |
+| 5  | [05_Redis設計.md](document/02_設計/05_Redis設計.md)           | DB 設計（Redis）      |        -        |        -        |
+| 6  | [06_画面設計.md](document/02_設計/06_画面設計.md)                 | 画面設計              |        -        |        -        |
+| 7  | [07_推薦設計.md](document/02_設計/07_推薦設計.md)                 | 推薦値の仕様            |        -        |        -        |
+| 8  | [08_学習モデル設計.md](document/02_設計/08_学習モデル設計.md)           | 学習モデルの仕様          |        -        |        -        |
 
 
 <br>
