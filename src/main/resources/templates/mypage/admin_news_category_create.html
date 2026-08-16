@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <!-- head 要素 -->
+  <head>
+    <!-- 文字コードを指定（UTF-8） -->
+    <meta charset="utf-8" />
+    <!-- viewport を設定（画面の幅を「端末の実際の幅」に合わせる・初期表示のズーム倍率を100%） -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 外部 CSS を読み込む（@{/css/site.css}） -->
+    <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <!-- 外部 CSS を読み込む（@{/css/mypage/admin_news_category_create.css}） -->
+    <link rel="stylesheet" th:href="@{/css/mypage/admin_news_category_create.css}" />
+    <!-- タイトル -->
+    <title th:text="#{ui.title.007}">Spring Web News - Admin</title>
+    <!-- アイコンを読み込む -->
+    <th:block th:replace="~{fragments/icon :: icon}"></th:block>
+  </head>
+  <!-- body 要素 -->
+  <body>
+    <!-- 共通フラグメント読込（~{fragments/header :: siteHeader}） -->
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
+
+    <!-- レイアウト用コンテナ -->
+    <div class="wrap">
+      <!-- グリッドレイアウト -->
+      <div class="grid">
+        <!-- 成功メッセージを表示 -->
+        <div th:if="${msg != null}" class="msg" th:text="${msg}"></div>
+        <!-- エラーメッセージを表示 -->
+        <div th:if="${err != null}" class="err" th:text="${err}"></div>
+
+        <!-- メインカード -->
+        <section class="card">
+          <!-- 見出し -->
+          <h1 class="title" th:text="#{mypage.menu.news.category.create}">ニュース/カテゴリの作成（NEWS_MGR：ニュース管理ロール）</h1>
+
+          <!-- フォーム（送信先: @{/mypage/admin/news/category/create}） -->
+          <form method="post" th:action="@{/mypage/admin/news/category/create}">
+
+            <div class="form-row">
+              <!-- 入力ラベル -->
+              <label th:text="#{ui.mypage_admin_news_category_create.002}">スラッグ（URLのパスの一部）</label>
+              <div class="form-field">
+                <!-- 入力欄（スラッグ） -->
+                <label>
+                  <input type="text" name="slug" placeholder="例：business" maxlength="10" required th:attr="placeholder=#{ui.mypage_admin_news_category_create.004}" />
+                </label>
+                <!-- 入力時の注意書き -->
+                <div class="small" th:text="#{ui.mypage_admin_news_category_create.006}">
+                  ※ スラッグが business の場合 ： &lt;http://sample/?category=business&gt;
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <!-- 入力ラベル -->
+              <label th:text="#{ui.mypage_admin_news_category_create.003}">カテゴリ名</label>
+              <div class="form-field">
+                <!-- 入力欄（カテゴリ名） -->
+                <label>
+                  <input type="text" name="name" placeholder="例：ビジネス" maxlength="10" required th:attr="placeholder=#{ui.mypage_admin_news_category_create.005}" />
+                </label>
+              </div>
+            </div>
+
+            <!-- 注意書き -->
+            <div class="row">
+              <span class="small">
+                ※ スラッグもカテゴリ名も重複禁止です（大文字小文字・前後空白は同一扱い）。
+              </span>
+            </div>
+
+            <!-- 作成後の操作ボタン群 -->
+            <div class="row">
+              <!-- 送信ボタン -->
+              <button type="submit" class="btn btn-ok" th:text="#{user.create.button.create}">作成</button>
+              <!-- リンク（遷移先: @{/mypage}） -->
+              <a class="btn" th:href="@{/mypage}" style="text-decoration: none" th:text="#{common.back_to_mypage}">各機能ページ一覧へ戻る</a>
+            </div>
+
+          </form>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

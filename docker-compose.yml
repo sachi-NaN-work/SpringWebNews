@@ -1,0 +1,217 @@
+# Docker Compose で起動するサービス（コンテナ）の一覧
+services:
+  # Spring(WebFlux)アプリのサービス名（コンテナ名のプレフィックスにもなる）
+  app:
+    # このフォルダ（Dockerfile がある場所）からイメージをビルドする
+    build: .
+    # ビルドしたイメージに付ける名前（タグ）
+    image: dockerimage-springwebnews:latest
+    # ホスト（Windows）⇔ コンテナのポート公開設定
+    ports:
+      # ホストの SERVER_PORT → コンテナの SERVER_PORT に転送（ブラウザは http://localhost:${SERVER_PORT} ）
+      - "${SERVER_PORT}:${SERVER_PORT}"
+
+    # 起動順・起動条件（依存サービスが先に準備できてから起動）
+    depends_on:
+      postgres:
+        # healthcheck がOK（Ready）になったら app を起動
+        condition: service_healthy
+
+      redis:
+        # healthcheck がOK（Ready）になったら app を起動
+        condition: service_healthy
+
+      kafka:
+        # “起動した”ことを条件（healthcheck が無いので started）
+        condition: service_started
+
+    # コンテナ内の環境変数（Spring Bootの設定にも使われる）
+    environment:
+      # Spring の起動プロファイル（例: dev）を.env等から渡す
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+      # アプリの待受ポート（.env の SERVER_PORT を使う）
+      SERVER_PORT: ${SERVER_PORT}
+      # OpenAPI / Swagger UI の有効・無効
+      SPRINGDOC_ENABLED: ${SPRINGDOC_ENABLED}
+      # R2DBC の接続 URL（Docker内ではDBホスト=postgres）
+      SPRING_R2DBC_URL: r2dbc:postgresql://postgres:5432/${POSTGRES_DB}
+      # DBユーザー名（.envのPOSTGRES_USERを使う）
+      SPRING_R2DBC_USERNAME: ${POSTGRES_USER}
+      # DBパスワード（.envのPOSTGRES_PASSWORDを使う）
+      SPRING_R2DBC_PASSWORD: ${POSTGRES_PASSWORD}
+      # Redis ホスト（Docker 内ではサービス名 redis で名前解決される）
+      SPRING_DATA_REDIS_HOST: redis
+      # Redis ポート（通常6379）
+      SPRING_DATA_REDIS_PORT: ${REDIS_PORT}
+      # Redis パスワード（redis-server --requirepass と一致させる）
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD}
+      # Kafka 接続先（Docker 内部向け INTERNAL リスナー）
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: ${KAFKA_BOOTSTRAP_SERVERS}
+      # training 側が参照する POSTGRES 系のホスト名を渡す
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      # training 側が参照する POSTGRES 系のポートを渡す
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      # training 側が参照する DB 名を渡す
+      POSTGRES_DB: ${POSTGRES_DB}
+      # training 側が参照するユーザー名を渡す
+      POSTGRES_USER: ${POSTGRES_USER}
+      # training 側が参照するパスワードを渡す
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    # ホストのファイル/フォルダをコンテナに渡す
+    volumes:
+      # 外部設定（./config）を読み取り専用で渡す
+      - ./config:/app/config:ro
+      # 外部設定（./model）を渡す
+      - ./model:/app/model
+
+    # Docker 再起動等で自動復帰（手動で止めた場合は次回起動しない）
+    restart: unless-stopped
+
+
+  # Postgres(DB) サービス
+  postgres:
+    # Postgres イメージ
+    image: postgres:16
+
+    # Postgres の初期化用環境変数
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    # ホスト（Windows）への公開（必要ならローカルのDBツールから接続できる）
+    ports:
+      # localhost 限定で公開（LAN/外部には公開しない）
+      - "127.0.0.1:5432:5432"
+
+    # データ永続化・初期化SQLの投入
+    volumes:
+      # 起動時に実行するSQL/スクリプトを配置
+      - ./infra/docker/postgres/init:/docker-entrypoint-initdb.d
+      # DBデータを名前付きボリュームに永続化
+      - postgres_data:/var/lib/postgresql/data
+
+    # “DB が使える状態(Ready)”かをチェック（depends_on の service_healthy 用）
+    healthcheck:
+      # DB に接続準備OKか確認
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      # 5秒ごとに実行
+      interval: 5s
+      # 3秒でタイムアウト
+      timeout: 3s
+      # 最大30回試す（=最大150秒程度待つ）
+      retries: 30
+
+    # 自動復帰（手動停止時は次回起動しない）
+    restart: unless-stopped
+
+  # Redis サービス
+  redis:
+    # Redis 公式イメージのバージョン7
+    image: redis:7
+    # 永続化ON＋パスワード必須
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD}"]
+    # ホストへの公開（必要ならローカルから接続可能）
+    ports:
+      # localhost 限定で公開（LAN/外部には公開しない）
+      - "127.0.0.1:16379:6379"
+
+    # データ永続化
+    volumes:
+      # Redis データを名前付きボリュームに永続化（AOF用）
+      - redis_data:/data
+
+    # Redis が応答するかチェック
+    healthcheck:
+      # 認証付き PING
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      # 5秒ごとに実行
+      interval: 5s
+      # 3秒でタイムアウト
+      timeout: 3s
+      # 最大30回試す
+      retries: 30
+
+    # 自動復帰
+    restart: unless-stopped
+
+  # Kafka サービス
+  kafka:
+    # Kafka イメージ
+    image: bitnamilegacy/kafka:3.7.0-debian-12-r7
+
+    # ホストへの公開
+    ports:
+      # localhostで公開
+      - "127.0.0.1:9092:9092"
+
+    # Kafka の環境変数
+    environment:
+      # ノード ID（単一ノード想定）
+      - KAFKA_CFG_NODE_ID=0
+      # controller と broker を兼ねる
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      # controller 用ポート:9094
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9094
+      # 受け口：内部/外部/コントローラを分離
+      - KAFKA_CFG_LISTENERS=INTERNAL://:9093,EXTERNAL://:9092,CONTROLLER://:9094
+      # 接続先として配るアドレス（内部は kafka 名、外部は localhost）
+      - KAFKA_CFG_ADVERTISED_LISTENERS=INTERNAL://kafka:9093,EXTERNAL://localhost:9092
+      # 各リスナーのプロトコル
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT
+      # ブローカー間通信に使うリスナー（内部）
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=INTERNAL
+      # controller が使うリスナー名
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      # topic 自動作成（開発向け）
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      # 平文通信を許可（開発向け）
+      - ALLOW_PLAINTEXT_LISTENER=yes
+
+    # データ永続化
+    volumes:
+      # Kafka データを名前付きボリュームに永続化
+      - kafka_data:/bitnami/kafka
+
+    # 自動復帰
+    restart: unless-stopped
+
+  # Prometheus サービス
+  prometheus:
+
+    # Prometheus イメージ
+    image: prom/prometheus:v3.13.2
+
+    # SpringWebNews 起動後に Prometheus を起動
+    depends_on:
+      app:
+        condition: service_started
+
+    # Prometheus の画面を localhost に公開
+    ports:
+      - "127.0.0.1:9090:9090"
+
+    # Prometheus の設定ファイルと保存領域
+    volumes:
+      # Prometheus の設定ファイル
+      - ./infra/docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+
+      # 収集した監視情報を永続化
+      - prometheus_data:/prometheus
+
+    # Prometheus の起動設定
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+
+    # Docker 再起動時に自動復帰
+    restart: unless-stopped
+
+
+# 名前付きボリューム定義（永続データ置き場）
+volumes:
+  postgres_data:
+  redis_data:
+  kafka_data:
+  prometheus_data:

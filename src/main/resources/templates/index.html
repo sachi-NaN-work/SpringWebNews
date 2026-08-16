@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <!-- head 要素 -->
+  <head>
+    <!-- 文字コードを指定（UTF-8） -->
+    <meta charset="utf-8" />
+    <!-- viewport を設定（画面の幅を「端末の実際の幅」に合わせる・初期表示のズーム倍率を100%） -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 外部 CSS を読み込む（@{/css/site.css}） -->
+    <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <!-- 外部 CSS を読み込む（@{/css/index.css}） -->
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+    <!-- 外部 JS を読み込む（@{/js/feedback.js}） -->
+    <script th:src="@{/js/feedback.js}" defer></script>
+    <!-- 外部 JS を読み込む（@{/js/favorites.js}） -->
+    <script th:src="@{/js/favorites.js}" defer></script>
+    <!-- タイトル -->
+    <title th:text="#{ui.title.002}">Spring Web News - Index</title>
+    <!-- アイコンを読み込む -->
+    <th:block th:replace="~{fragments/icon :: icon}"></th:block>
+  </head>
+  <!-- body 要素 -->
+  <body>
+    <!-- 共通フラグメント読込（~{fragments/header :: siteHeader}） -->
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
+
+    <!-- レイアウト用コンテナ -->
+    <div class="layout">
+      <!-- 共通サイドバー読み込み -->
+      <div
+        th:replace="~{fragments/sidebar :: leftMenu(categories=${categories}, selectedCategory=${selectedCategory}, favorites=${favorites}, categoryNameById=${categoryNameById})}"
+      >
+      </div>
+
+      <!-- 中央コンテンツ領域 -->
+      <main class="main-center">
+        <!-- 見出し -->
+        <h1 class="section-title" th:text="${centerTitle}">最新ニュース</h1>
+        <!-- 一覧が空の場合のメッセージ -->
+        <div class="small" th:if="${#lists.isEmpty(centerNews)}" th:text="#{common.no_articles_paren}">（記事がありません）</div>
+
+        <!-- リスト表示 -->
+        <ul>
+          <!-- 一覧を1件ずつ表示 -->
+          <li
+            th:each="newsItem : ${centerNews}"
+            th:with="catName=${categoryNameById[newsItem.categoryId.toString()]}"
+          >
+            <!-- リンク -->
+            <a
+              th:href="@{|/news/${newsItem.id}?src=${centerSource}|}"
+              th:text="${'・【' + (catName != null ? catName : '不明') + '】' + newsItem.title}"
+            >
+            </a>
+          </li>
+        </ul>
+      </main>
+
+      <!-- サイド領域 -->
+      <aside class="main-right">
+        <!-- マイページ導線 -->
+        <div class="mypage-nav">
+          <!-- リンク（遷移先: @{/mypage}） -->
+          <a class="btn-link" th:href="@{/mypage}" th:text="#{mypage.h1}">マイページ</a>
+        </div>
+        <!-- 区切り線 -->
+        <div class="right-divider"></div>
+
+        <!-- セクション見出し -->
+        <h2 th:text="#{ui.index.002}">リアルタイム推薦</h2>
+        <!-- 推薦表示の補足情報 -->
+        <div class="rec-note" th:text="#{ui.index.003}">（デモサイトのため、推薦値等を表示しています。）</div>
+        <!-- 一覧リスト -->
+        <ul>
+          <!-- カテゴリ付きタイトル -->
+          <li class="rec-item" th:each="recommendedNews : ${rec}"
+              th:with="recCategoryName=${recommendedNews.categoryId != null ? categoryNameById[recommendedNews.categoryId.toString()] : null},
+                recDisplayTitle=${recCategoryName != null ? '【' + recCategoryName + '】' + recommendedNews.title : recommendedNews.title}"
+          >
+
+            <!-- リンク（遷移先: @{|/news/${recommendedNews.newsId}?src=rec|}） -->
+            <a class="rec-link" th:href="@{|/news/${recommendedNews.newsId}?src=rec|}" th:text="${recDisplayTitle}"></a>
+            <!-- 推薦値を表示 -->
+            <div class="rec-score" th:text="${'推薦値：' + recommendedNews.scoreText()}">推薦値：0.0000</div>
+
+            <!-- 推薦値詳細を折りたたみ表示 -->
+            <details class="rec-detail-section">
+              <!-- 推薦値詳細の開閉ラベル -->
+              <summary>[推薦値詳細を表示]</summary>
+              <!-- 推薦値詳細の本文 -->
+              <pre class="rec-detail" th:text="${recommendedNews.recommendationDetailText()}">▼ 推薦値の計算</pre>
+            </details>
+
+            <!-- 基本評価詳細を折りたたみ表示 -->
+            <details class="rec-detail-section">
+              <!-- 基本評価詳細の開閉ラベル -->
+              <summary>[基本評価詳細を表示]</summary>
+              <!-- 基本評価詳細の本文 -->
+              <pre class="rec-detail" th:text="${recommendedNews.baseScoreDetailText()}">▼ 基本評価の計算</pre>
+            </details>
+
+            <!-- 学習モデル評価詳細を折りたたみ表示 -->
+            <details class="rec-detail-section">
+              <!-- 学習モデル評価詳細の開閉ラベル -->
+              <summary>[学習モデル評価詳細を表示]</summary>
+              <!-- 学習モデル評価詳細の本文 -->
+              <pre class="rec-detail" th:text="${recommendedNews.modelScoreDetailText()}">▼ 学習モデル評価の計算</pre>
+            </details>
+
+            <!-- 調整値詳細を折りたたみ表示 -->
+            <details class="rec-detail-section">
+              <!-- 調整値詳細の開閉ラベル -->
+              <summary>[調整値詳細を表示]</summary>
+              <!-- 調整値詳細の本文 -->
+              <pre class="rec-detail" th:text="${recommendedNews.adjustmentDetailText()}">▼ 調整値の計算</pre>
+            </details>
+
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </body>
+</html>

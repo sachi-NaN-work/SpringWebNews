@@ -1,0 +1,24 @@
+# 結合試験用
+server:
+  port: 0
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+
+  data:
+    redis:
+      host: localhost
+      port: 16379
+      password: ${REDIS_PASSWORD}
+
+  kafka:
+    bootstrap-servers: localhost:9092
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false

@@ -1,0 +1,82 @@
+/* ハッシュタグ選択UI（検索 + 一覧） */
+.tag-search {
+  /* 外側余白を設定（6px 0 10px） */
+  margin: 6px 0 10px;
+}
+
+.tag-search input {
+  /* 幅を設定（100%） */
+  width: 100%;
+  /* 内側余白を設定（10px 12px） */
+  padding: 10px 12px;
+  /* 枠線を設定（1px solid #cfcfcf） */
+  border: 1px solid #cfcfcf;
+  /* 角丸を設定（8px） */
+  border-radius: 8px;
+  /* 幅計算方法を指定（border-box） */
+  box-sizing: border-box;
+}
+
+.tag-list {
+  /* 表示形式を設定（flex） */
+  display: flex;
+  /* 並び方向を指定（column） */
+  flex-direction: column;
+  /* 要素間の間隔を設定（6px） */
+  gap: 6px;
+  /* 最大高さを設定（260px） */
+  max-height: 260px;
+  /* はみ出し表示を指定（auto） */
+  overflow: auto;
+  /* 内側余白を設定（6px） */
+  padding: 6px;
+  /* 枠線を設定（1px solid #e0e0e0） */
+  border: 1px solid #e0e0e0;
+  /* 角丸を設定（8px） */
+  border-radius: 8px;
+  /* 背景を設定（#fff） */
+  background: #fff;
+}
+
+.tag-row {
+  /* 表示形式を設定（flex） */
+  display: flex;
+  /* 縦方向の揃えを設定（center） */
+  align-items: center;
+  /* 要素間の間隔を設定（10px） */
+  gap: 10px;
+  /* 内側余白を設定（8px 10px） */
+  padding: 8px 10px;
+  /* 枠線を設定（1px solid #ddd） */
+  border: 1px solid #ddd;
+  /* 角丸を設定（8px） */
+  border-radius: 8px;
+  /* カーソル形状を指定（pointer） */
+  cursor: pointer;
+  /* テキスト選択可否を指定（none） */
+  user-select: none;
+}
+
+.tag-row:hover {
+  /* 背景を設定（#f8f8f8） */
+  background: #f8f8f8;
+}
+
+.tag-row input {
+  /* 幅を設定（18px） */
+  width: 18px;
+  /* 高さを設定（18px） */
+  height: 18px;
+}
+
+.tag-row.is-hidden {
+  /* 表示形式を設定（none） */
+  display: none;
+}
+
+.tag-row.is-disabled {
+  /* 不透明度を指定（.55） */
+  opacity: .55;
+  /* カーソル形状を指定（not-allowed） */
+  cursor: not-allowed;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <!-- head 要素 -->
+  <head>
+    <!-- 文字コードを指定（UTF-8） -->
+    <meta charset="utf-8" />
+    <!-- viewport を設定（画面の幅を「端末の実際の幅」に合わせる・初期表示のズーム倍率を100%） -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 外部 CSS を読み込む（@{/css/site.css}） -->
+    <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <!-- 外部 CSS を読み込む（@{/css/error.css}） -->
+    <link rel="stylesheet" th:href="@{/css/error.css}" />
+    <!-- タイトル -->
+    <title th:text="#{ui.title.004}">Spring Web News - Error</title>
+    <!-- アイコンを読み込む -->
+    <th:block th:replace="~{fragments/icon :: icon}"></th:block>
+  </head>
+  <!-- body 要素 -->
+  <body>
+    <!-- 共通フラグメント読込（~{fragments/header :: siteHeader}） -->
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
+
+    <!-- レイアウト用コンテナ -->
+    <div class="wrap">
+      <!-- メインカード -->
+      <section class="card">
+        <!-- 見出し -->
+        <h1 class="title" th:text="#{ui.error.002}">エラー</h1>
+        <!-- エラーメッセージを表示 -->
+        <div class="err" th:text="${msg != null ? msg : #messages.msg('common.err.unexpected')}"></div>
+        <!-- 画面遷移用の操作行 -->
+        <div class="row">
+          <!-- リンク（遷移先: @{/mypage}） -->
+          <a class="btn" th:href="@{/mypage}" th:text="#{ui.error.003}">マイページへ戻る</a>
+          <!-- リンク（遷移先: @{/}） -->
+          <a class="btn" th:href="@{/}" th:text="#{ui.error.004}">トップへ戻る</a>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

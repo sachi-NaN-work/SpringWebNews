@@ -1,0 +1,95 @@
+/* スタイル定義（対象: body） */
+body {
+  /* フォントを指定（system-ui, -apple-system, Segoe UI, Roboto, sans-serif） */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  /* 余白を設定（0） */
+  margin: 0;
+}
+
+/* スタイル定義（対象: .wrap） */
+.wrap {
+  /* 最大幅を設定（980px） */
+  max-width: 980px;
+  /* 余白を設定（0 auto） */
+  margin: 0 auto;
+  /* 内側余白を設定（12px） */
+  padding: 12px;
+}
+
+/* スタイル定義（対象: .card） */
+.card {
+  /* 背景を設定（#ffffff） */
+  background: #ffffff;
+  /* 角丸を設定（10px） */
+  border-radius: 10px;
+  /* 内側余白を設定（12px） */
+  padding: 12px;
+}
+
+/* スタイル定義（対象: .title） */
+.title {
+  /* 文字サイズを設定（18px） */
+  font-size: 18px;
+  /* 余白を設定（0 0 10px） */
+  margin: 0 0 10px;
+  /* 下側の内側余白を設定（8px） */
+  padding-bottom: 8px;
+  /* 下側の枠線を設定（4px solid #333） */
+  border-bottom: 4px solid #333;
+}
+
+/* スタイル定義（対象: .err） */
+.err {
+  /* 背景を設定（#fde7e7） */
+  background: #fde7e7;
+  /* 枠線を設定（1px solid #e08a8a） */
+  border: 1px solid #e08a8a;
+  /* 文字色を設定（#9c1d1d） */
+  color: #9c1d1d;
+  /* 内側余白を設定（10px 12px） */
+  padding: 10px 12px;
+  /* 角丸を設定（10px） */
+  border-radius: 10px;
+}
+
+/* スタイル定義（対象: .btn） */
+.btn {
+  /* 表示形式を設定（inline-block） */
+  display: inline-block;
+  /* 内側余白を設定（10px 12px） */
+  padding: 10px 12px;
+  /* 角丸を設定（10px） */
+  border-radius: 10px;
+  /* 枠線を設定（1px solid #aaa） */
+  border: 1px solid #aaa;
+  /* 背景を設定（#f3f3f3） */
+  background: #f3f3f3;
+  /* カーソル形状を設定（pointer） */
+  cursor: pointer;
+  /* 装飾（下線など）を設定（none） */
+  text-decoration: none;
+  /* 文字色を設定（inherit） */
+  color: inherit;
+}
+
+/* スタイル定義（対象: .btn:hover） */
+.btn:hover {
+  /* 背景を設定（#eee） */
+  background: #eee;
+}
+
+/* スタイル定義（対象: .row） */
+.row {
+  /* 表示形式を設定（flex） */
+  display: flex;
+  /* 要素間の間隔を設定（10px） */
+  gap: 10px;
+  /* 縦方向の揃えを設定（center） */
+  align-items: center;
+  /* 横方向の揃えを設定（flex-start） */
+  justify-content: flex-start;
+  /* 上側の余白を設定（12px） */
+  margin-top: 12px;
+  /* 折り返しを許可（wrap） */
+  flex-wrap: wrap;
+}

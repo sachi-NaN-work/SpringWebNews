@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <!-- head 要素 -->
+  <head>
+    <!-- 文字コードを指定（UTF-8） -->
+    <meta charset="utf-8" />
+    <!-- viewport を設定（画面の幅を「端末の実際の幅」に合わせる・初期表示のズーム倍率を100%） -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 外部 CSS を読み込む（@{/css/login.css}） -->
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <!-- 外部 JS を読み込む（@{/js/login.js}） -->
+    <script th:src="@{/js/login.js}" defer></script>
+    <!-- タイトル -->
+    <title th:text="#{ui.title.001}">Spring Web News - Login</title>
+    <!-- アイコンを読み込む -->
+    <th:block th:replace="~{fragments/icon :: icon}"></th:block>
+  </head>
+
+  <!-- body 要素 -->
+  <body>
+    <!-- レイアウト用コンテナ -->
+    <div class="wrap">
+      <!-- ログインカード -->
+      <div class="login-card">
+        <!-- 見出し -->
+        <h1 th:text="#{site.title}">Spring Web News</h1>
+
+        <!-- フォーム（送信先: @{/login}） -->
+        <form th:action="@{/login}" method="post" id="loginForm" novalidate>
+
+          <!-- Cookie 無効メッセージ -->
+          <p id="cookie-warning" class="cookie-warning" role="alert" hidden>
+            <span th:text="#{ui.login.005.line1}">Cookie が無効になっています。</span>
+            <br>
+            <span th:text="#{ui.login.005.line2}">ブラウザ設定で Cookie の保存を許可してください。</span>
+          </p>
+
+          <!-- 入力ラベル（ユーザーID） -->
+          <label for="username" th:text="#{mypage.label.username}">ユーザーID</label>
+          <!-- 入力欄（ユーザーID） -->
+          <input
+            id="username"
+            type="text"
+            name="username"
+            placeholder="ユーザーID"
+            th:attr="placeholder=#{mypage.label.username}"
+          />
+          <span class="field-err" id="err-username"></span>
+
+          <!-- 入力ラベル（パスワード） -->
+          <label for="password" th:text="#{user.create.label.password}">パスワード</label>
+          <!-- 入力欄（パスワード） -->
+          <input
+            id="password"
+            type="password"
+            name="password"
+            placeholder="パスワード"
+            th:attr="placeholder=#{user.create.label.password}"
+          />
+          <span class="field-err" id="err-password"></span>
+
+          <!-- 送信ボタン -->
+          <button type="submit" th:text="#{ui.login.001}">ログイン</button>
+
+          <!-- 外部リンク表示領域（設定されている場合のみ） -->
+          <div
+            class="linkUrl-wrap"
+            th:if="${(linkUrl != null and !#strings.isEmpty(linkUrl)) or (textComment != null and !#strings.isEmpty(textComment))}"
+          >
+            <div class="divider" aria-hidden="true"></div>
+
+            <!-- リンク URL（設定: app.links.link-url） -->
+            <p class="linkUrl-line" th:if="${linkUrl != null and !#strings.isEmpty(linkUrl)}">
+              <span th:text="#{ui.login.003}">リンク:</span>
+              <!-- 画面遷移リンク -->
+              <a
+                class="link"
+                th:href="${linkUrl}"
+                target="_blank"
+                rel="noopener noreferrer"
+                th:text="${linkUrl}"
+              >
+                リンク - URL</a>
+            </p>
+
+            <!-- 表示コメント（設定: app.links.text-comment） -->
+            <p class="text-comment" th:if="${textComment != null and !#strings.isEmpty(textComment)}">
+              <span th:text="#{ui.login.004}">＜コメント＞</span>
+              <span class="text-comment-value" th:text="${textComment}"></span>
+            </p>
+          </div>
+
+          <!-- 認証エラー -->
+          <p class="err" th:if="${param.error != null and !param.error.isEmpty()}" th:text="#{ui.login.002}">
+            ログインに失敗しました
+          </p>
+
+          <!-- ロックアウトメッセージ（LoginController が生成） -->
+          <p class="err" th:if="${param.locked != null and !param.locked.isEmpty()}" th:text="${lockoutMessage}"></p>
+
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

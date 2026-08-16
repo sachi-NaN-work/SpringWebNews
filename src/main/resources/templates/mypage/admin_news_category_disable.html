@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <!-- head 要素 -->
+  <head>
+    <!-- 文字コードを指定（UTF-8） -->
+    <meta charset="utf-8" />
+    <!-- viewport を設定（画面の幅を「端末の実際の幅」に合わせる・初期表示のズーム倍率を100%） -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 外部 CSS を読み込む（@{/css/site.css}） -->
+    <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <!-- 外部 CSS を読み込む（@{/css/mypage/admin_news_category_disable.css}） -->
+    <link rel="stylesheet" th:href="@{/css/mypage/admin_news_category_disable.css}" />
+    <!-- タイトル -->
+    <title th:text="#{ui.title.007}">Spring Web News - Admin</title>
+    <!-- アイコンを読み込む -->
+    <th:block th:replace="~{fragments/icon :: icon}"></th:block>
+  </head>
+  <!-- body 要素 -->
+  <body>
+    <!-- 共通フラグメント読込（~{fragments/header :: siteHeader}） -->
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
+
+    <!-- レイアウト用コンテナ -->
+    <div class="wrap">
+      <!-- 成功メッセージを表示 -->
+      <div th:if="${msg != null}" class="msg" th:text="${msg}"></div>
+      <!-- エラーメッセージを表示 -->
+      <div th:if="${err != null}" class="err" th:text="${err}"></div>
+
+      <!-- メインカード -->
+      <section class="card">
+        <!-- 見出し -->
+        <h1 class="title" th:text="#{mypage.menu.news.category.disable}">ニュース/カテゴリの有効・無効切替（NEWS_MGR：ニュース管理ロール）</h1>
+
+        <!-- 対象データがない場合のメッセージ -->
+        <div th:if="${#lists.size(categories) == 0}" class="small" th:text="#{ui.mypage_admin_news_category_disable.002}">カテゴリがありません。</div>
+
+        <!-- 一覧テーブル -->
+        <table th:if="${#lists.size(categories) > 0}">
+          <!-- テーブル構造 -->
+          <thead>
+            <tr>
+              <th th:text="#{ui.mypage_admin_news_category_disable.003}">スラッグ（URLのパスの一部）</th>
+              <th th:text="#{ui.mypage_admin_news_category_disable.004}">カテゴリ名</th>
+              <th th:text="#{mypage.label.status}">状態</th>
+              <th th:text="#{user.role.th.action}">操作</th>
+            </tr>
+          </thead>
+          <!-- テーブル本体 -->
+          <tbody>
+            <!-- 繰り返し表示行 -->
+            <tr th:each="category : ${categories}">
+              <td class="mono" th:text="${category.slug}">slug</td>
+              <td th:text="${category.name}">name</td>
+              <td>
+                <!-- 条件付き表示 -->
+                <span th:if="${category.enabled}" class="badge badge-on" th:text="#{common.enabled}">有効</span>
+                <span th:if="${!category.enabled}" class="badge badge-off" th:text="#{common.disabled}">無効</span>
+              </td>
+              <td>
+                <!-- フォーム -->
+                <form
+                  th:action="@{/mypage/admin/news/category/disable/{id}(id=${category.id})}"
+                  method="post"
+                  style="display: inline"
+                >
+                  <!-- 入力欄 -->
+                  <input
+                    type="hidden"
+                    th:if="${_csrf != null}"
+                    th:name="${_csrf.parameterName}"
+                    th:value="${_csrf.token}"
+                  />
+                  <!-- 操作ボタン -->
+                  <button
+                    type="submit"
+                    th:class="${category.enabled} ? 'btn' : 'btn btn-on'"
+                    th:text="${category.enabled} ? '無効にする' : '有効にする'"
+                  >
+                    切替
+                  </button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="row">
+          <!-- リンク（遷移先: @{/mypage}） -->
+          <a class="btn link" th:href="@{/mypage}" th:text="#{common.back_to_mypage}">各機能ページ一覧へ戻る</a>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

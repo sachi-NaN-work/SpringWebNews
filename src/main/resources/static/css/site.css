@@ -1,0 +1,354 @@
+/* スタイル定義（対象: .site-header） */
+.site-header {
+  /* 表示形式を設定（grid） */
+  display: grid;
+  /* グリッド列幅を設定（auto minmax(0, 1fr) auto） */
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  /* 縦方向の揃えを設定（center） */
+  align-items: center;
+  /* 要素間の間隔を設定（8px） */
+  gap: 8px;
+  /* 内側余白を設定（7px 14px） */
+  padding: 7px 14px;
+  /* 下側の枠線を設定（1px solid #ddd） */
+  border-bottom: 1px solid #ddd;
+  /* 背景を設定（#bfe9ff） */
+  background: #bfe9ff;
+  /* 配置方式を設定（sticky） */
+  position: fixed;
+  /* 左端位置を指定（0） */
+  left: 0;
+  /* 右端位置を指定（0） */
+  right: 0;
+  /* 上端位置を指定（0） */
+  top: 0;
+  /* 重なり順を指定（1000） */
+  z-index: 1000;
+}
+
+/* スタイル定義（対象: .site-header__left, .site-header__right） */
+.site-header__left,
+.site-header__right {
+  /* 表示形式を設定（flex） */
+  display: flex;
+  /* 縦方向の揃えを設定（center） */
+  align-items: center;
+}
+
+/* スタイル定義（対象: .site-header__left） */
+.site-header__left {
+  /* 横方向の揃えを設定（flex-start） */
+  justify-content: flex-start;
+}
+
+.site-header__right {
+  /* 横方向の揃えを設定（flex-end） */
+  justify-content: flex-end;
+}
+
+/* スタイル定義（対象: .site-header__center） */
+.site-header__center {
+  /* 最小幅を設定（0） */
+  min-width: 0;
+  /* 表示形式を設定（flex） */
+  display: flex;
+  /* 横方向の揃えを設定（center） */
+  justify-content: center;
+  /* 縦方向の揃えを設定（center） */
+  align-items: center;
+}
+
+/* スタイル定義（対象: .btn-link） */
+.btn-link {
+  /* ブラウザ標準の見た目を無効化（none） */
+  appearance: none;
+  /* 枠線を設定（1px solid #666） */
+  border: 1px solid #666;
+  /* 背景を設定（#e0e0e0） */
+  background: #e0e0e0;
+  /* 内側余白を設定（6px 10px） */
+  padding: 6px 10px;
+  /* 角丸を設定（8px） */
+  border-radius: 8px;
+  /* カーソル形状を設定（pointer） */
+  cursor: pointer;
+  /* 文字サイズを設定（14px） */
+  font-size: 14px;
+  /* 文字色を設定（#111） */
+  color: #111;
+  /* 装飾（下線など）を設定（none） */
+  text-decoration: none;
+}
+
+/* スタイル定義（対象: .btn-link:hover） */
+.btn-link:hover {
+  /* 背景を設定（#eee） */
+  background: #eee;
+}
+
+/* スタイル定義（対象: .site-title-img） */
+.site-title-img {
+  /* 高さを設定（44px） */
+  height: 44px;
+  /* 幅を設定（min(620px, 100%)） */
+  width: min(620px, 100%);
+  /* 最大幅を設定（100%） */
+  max-width: 100%;
+  /* 表示形式を設定（block） */
+  display: block;
+  /* 画像の収まり方を指定（contain） */
+  object-fit: contain;
+}
+
+/* スタイル定義（対象: .site-header__center a） */
+.site-header__center a {
+  /* 表示形式を設定（inline-block） */
+  display: inline-block;
+  /* 最大幅を設定（100%） */
+  max-width: 100%;
+}
+
+.site-header {
+  /* 背景を設定（#6ac2ff） */
+  background: #6ac2ff;
+}
+
+/* スタイル定義（対象: body） */
+body {
+  /* 背景を設定（#bfe9ff） */
+  background: #bfe9ff;
+  /* 横方向のはみ出し表示を指定（hidden） */
+  overflow-x: hidden;
+  /* 上側の内側余白を設定（64px） */
+  padding-top: 64px;
+}
+
+/* スタイル定義（対象: .main-left） */
+.main-left {
+  /* 背景を設定（#fff7c7） */
+  background: #fff7c7;
+}
+
+/* スタイル定義（対象: .main-center） */
+.main-center {
+  /* 背景を設定（#ffffff） */
+  background: #ffffff;
+}
+
+/* スタイル定義（対象: .main-right） */
+.main-right {
+  /* 背景を設定（#fff7c7） */
+  background: #fff7c7;
+}
+
+.main-left, .main-center, .main-right {
+  /* 内側余白を設定（12px） */
+  padding: 12px;
+  /* 角丸を設定（10px） */
+  border-radius: 10px;
+}
+
+/* スタイル定義（対象: .fav-btn） */
+.fav-btn {
+  /* ブラウザ標準の見た目を無効化（none） */
+  appearance: none;
+  /* 枠線を設定（0） */
+  border: 0;
+  /* 背景を設定（transparent） */
+  background: transparent;
+  /* 内側余白を設定（0） */
+  padding: 0;
+  /* カーソル形状を指定（pointer） */
+  cursor: pointer;
+  /* 行間を設定（1） */
+  line-height: 1;
+}
+
+/* スタイル定義（対象: .fav-btn .fav-icon） */
+.fav-btn .fav-icon {
+  /* 文字色を設定（#777） */
+  color: #777;
+  /* 文字サイズを設定（22px） */
+  font-size: 22px;
+  /* 行の高さを設定（1） */
+  line-height: 1;
+}
+
+/* スタイル定義（対象: .fav-btn.is-fav .fav-icon） */
+.fav-btn.is-fav .fav-icon {
+  /* 文字色を設定（#f5c400） */
+  color: #f5c400;
+}
+
+/* スタイル定義（対象: .category-section） */
+.category-section {
+  /* 上側の外側余白を設定（16px） */
+  margin-top: 16px;
+  /* 上側の内側余白を設定（12px） */
+  padding-top: 12px;
+  /* 上側の枠線を設定（3px solid #333） */
+  border-top: 3px solid #333;
+}
+
+/* カテゴリ項目の左余白 */
+.category-section ul {
+  padding-left: 8px;
+}
+
+/* スタイル定義（対象: .fav-section） */
+.fav-section {
+  /* 上側の外側余白を設定（16px） */
+  margin-top: 16px;
+  /* 上側の内側余白を設定（12px） */
+  padding-top: 12px;
+  /* 上側の枠線を設定（3px solid #333） */
+  border-top: 3px solid #333;
+}
+
+/* スタイル定義（対象: .fav-list li） */
+.fav-list li {
+  /* 表示形式を設定（flex） */
+  display: flex;
+  /* 縦方向の揃えを設定（flex-start） */
+  align-items: flex-start;
+  /* 要素間の間隔を設定（6px） */
+  gap: 6px;
+}
+
+/* スタイル定義（対象: .fav-list a） */
+.fav-list a {
+  /* 文字サイズを設定（12px） */
+  font-size: 12px;
+  /* 行間を設定（1.35） */
+  line-height: 1.35;
+}
+
+/* スタイル定義（対象: .fav-remove） */
+.fav-remove {
+  /* ブラウザ標準の見た目を無効化（none） */
+  appearance: none;
+  /* 枠線を設定（0） */
+  border: 0;
+  /* 背景を設定（transparent） */
+  background: transparent;
+  /* 内側余白を設定（0） */
+  padding: 0;
+  /* カーソル形状を指定（pointer） */
+  cursor: pointer;
+  /* 行の高さを設定（1） */
+  line-height: 1;
+}
+
+/* スタイル定義（対象: .fav-remove:active） */
+.fav-remove:active {
+  /* 変形を指定（translateY(1px)） */
+  transform: translateY(1px);
+}
+
+/* スタイル定義（対象: .fav-remove .fav-icon） */
+.fav-remove .fav-icon {
+  /* 文字色を設定（#f5c400） */
+  color: #f5c400;
+  /* 文字サイズを設定（18px） */
+  font-size: 18px;
+  /* 行の高さを設定（1） */
+  line-height: 1;
+}
+
+/* スタイル定義（対象: .fav-empty） */
+.fav-empty {
+  /* 文字色を設定（#666） */
+  color: #666;
+  /* 文字サイズを設定（13px） */
+  font-size: 13px;
+}
+
+/* スタイル定義（対象: .fav-dialog） */
+.fav-dialog {
+  /* 枠線を設定（0） */
+  border: 0;
+  /* 角丸を設定（12px） */
+  border-radius: 12px;
+  /* 内側余白を設定（0） */
+  padding: 0;
+  /* 影を設定（0 12px 40px rgba(0, 0, 0, 0.25)） */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* スタイル定義（対象: .fav-dialog::backdrop） */
+.fav-dialog::backdrop {
+  /* 背景を設定（rgba(0, 0, 0, 0.35)） */
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* スタイル定義（対象: .fav-dialog__form） */
+.fav-dialog__form {
+  /* 内側余白を設定（14px 16px） */
+  padding: 14px 16px;
+  /* 最小幅を設定（260px） */
+  min-width: 260px;
+}
+
+/* スタイル定義（対象: .fav-dialog__title） */
+.fav-dialog__title {
+  /* 余白を設定（0 0 14px） */
+  margin: 0 0 14px;
+  /* 文字サイズを設定（14px） */
+  font-size: 14px;
+  /* 文字の太さを設定（700） */
+  font-weight: 700;
+}
+
+/* スタイル定義（対象: .fav-dialog__actions） */
+.fav-dialog__actions {
+  /* 表示形式を設定（flex） */
+  display: flex;
+  /* 横方向の揃えを設定（flex-end） */
+  justify-content: flex-end;
+  /* 要素間の間隔を設定（10px） */
+  gap: 10px;
+}
+
+/* スタイル定義（対象: .fav-dialog__btn） */
+.fav-dialog__btn {
+  /* 枠線を設定（1px solid #888） */
+  border: 1px solid #888;
+  /* 背景を設定（#f1f1f1） */
+  background: #f1f1f1;
+  /* 内側余白を設定（6px 12px） */
+  padding: 6px 12px;
+  /* 角丸を設定（10px） */
+  border-radius: 10px;
+  /* カーソル形状を指定（pointer） */
+  cursor: pointer;
+  /* 文字サイズを設定（13px） */
+  font-size: 13px;
+}
+
+/* スタイル定義（対象: .fav-dialog__btn--primary） */
+.fav-dialog__btn--primary {
+  /* 枠線色を指定（#555） */
+  border-color: #555;
+  /* 背景を設定（#e0e0e0） */
+  background: #e0e0e0;
+  /* 文字の太さを設定（700） */
+  font-weight: 700;
+}
+
+/* スタイル定義（対象: .mypage-nav） */
+.mypage-nav {
+  /* 表示形式を設定（flex） */
+  display: flex;
+  /* 横方向の揃えを設定（flex-start） */
+  justify-content: flex-start;
+  /* 下側の外側余白を設定（10px） */
+  margin-bottom: 10px;
+}
+
+/* スタイル定義（対象: .right-divider） */
+.right-divider {
+  /* 上側の枠線を設定（3px solid #333） */
+  border-top: 3px solid #333;
+  /* 余白を設定（10px 0 12px） */
+  margin: 10px 0 12px;
+}

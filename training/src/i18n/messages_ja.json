@@ -1,0 +1,50 @@
+{
+  "warn": {
+    "no_feedback": "フィードバックが0件のため、ダミーデータで学習します。",
+    "yaml_parse_failed": "YAML 解析に失敗したため、デフォルト値で継続します。",
+    "onnx_missing": "ONNX 出力ファイルが無いため、後処理をスキップします。",
+    "no_feedback_with_marker": "%s %s",
+    "no_feedback_skip": "フィードバックが0件のため、学習をスキップします（既存成果物を維持）。"
+  },
+  "error": {
+    "news_empty": "news テーブルにデータが無いため学習できません。",
+    "sql_missing": "SQL ファイルが見つかりません: %s",
+    "sql_read_failed": "SQL ファイルの読み込みに失敗しました: %s",
+    "postgres_password_missing": "環境変数 POSTGRES_PASSWORD（または SPRING_R2DBC_PASSWORD）が未設定です。"
+  },
+  "info": {
+    "db_connect": "DB ホスト=%s DB=%s ユーザー=%s",
+    "loaded_weights": "読み込んだ重み: %s",
+    "loaded_rt_rec": "読み込んだ rt-rec 係数: %s",
+    "loaded_ab_test": "読み込んだ A/B 設定: %s",
+    "table_rows": {
+      "news": "news テーブル=%d",
+      "feedback": "feedback テーブル=%d",
+      "news_hashtags": "news_hashtags テーブル=%d"
+    },
+    "trained_ridge": "Ridge を学習しました: coef=%s",
+    "exported_onnx": "ONNX を出力しました: %s",
+    "report_path": "レポート: %s",
+    "ridge": {
+      "trained": "Ridge 学習が完了しました",
+      "params": "Ridge パラメータ: alpha=%.4f seed=%d negPerPos=%d negativeWeight=%.3f",
+      "dataset": "Ridge 学習データ: feedbackRows=%d datasetRows=%d",
+      "coef_header": "Ridge 係数一覧:",
+      "coef_row": "%02d.[%-23s] = %+.6f        # %s"
+    }
+  },
+  "label": {
+    "intercept": "基準値（切片）"
+  },
+  "help": {
+    "out": "ONNX の出力先パス",
+    "ab_group": "学習対象の A/B グループ（ALL/A/B）。ALL は全件",
+    "neg_per_pos": "正例 1 件あたりの負例数（現在は 0 を推奨）",
+    "seed": "乱数シード",
+    "ridge_alpha": "Ridge 回帰の正則化係数（alpha）",
+    "negative_weight": "負例（y=0）のサンプル重み",
+    "source_weight_yaml": "source 重み（rec.feedback-weight.*）を読む application.yml（または application-*.yml）のパス",
+    "rt_rec_yaml": "rt-rec 係数（rec.rt-rec.*）を読む application.yml（または application-*.yml）のパス",
+    "verbose": "詳細ログ（DEBUG）を出力"
+  }
+}

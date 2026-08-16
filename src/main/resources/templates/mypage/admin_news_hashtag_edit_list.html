@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <!-- head 要素 -->
+  <head>
+    <!-- 文字コードを指定（UTF-8） -->
+    <meta charset="utf-8" />
+    <!-- viewport を設定（画面の幅を「端末の実際の幅」に合わせる・初期表示のズーム倍率を100%） -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 外部 CSS を読み込む（@{/css/site.css}） -->
+    <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <!-- 外部 CSS を読み込む（@{/css/mypage/menu.css}） -->
+    <link rel="stylesheet" th:href="@{/css/mypage/menu.css}" />
+    <!-- タイトル -->
+    <title th:text="#{ui.title.007}">Spring Web News - Admin</title>
+    <!-- アイコンを読み込む -->
+    <th:block th:replace="~{fragments/icon :: icon}"></th:block>
+  </head>
+  <!-- body 要素 -->
+  <body>
+    <!-- 共通ヘッダー -->
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
+
+    <!-- 画面全体のラッパー -->
+    <div class="wrap">
+      <!-- グリッドレイアウト -->
+      <div class="grid">
+        <!-- 正常メッセージ表示領域 -->
+        <div th:if="${msg != null}" class="msg" th:text="${msg}"></div>
+        <!-- エラーメッセージ表示領域 -->
+        <div th:if="${err != null}" class="err" th:text="${err}"></div>
+
+        <!-- メインカード -->
+        <section class="card">
+          <!-- 画面見出し -->
+          <h1 class="title" th:text="#{ui.mypage_admin_news_hashtag_edit_list.002}">既存ニュースのハッシュタグ編集（一覧から選択）</h1>
+
+          <!-- 一覧が空の場合のメッセージ -->
+          <div class="small" th:if="${newsList == null or #lists.isEmpty(newsList)}" th:text="#{common.no_articles_paren}">（記事がありません）</div>
+
+          <!-- 一覧テーブル -->
+          <table th:if="${newsList != null and !#lists.isEmpty(newsList)}">
+            <!-- テーブルヘッダー -->
+            <thead>
+              <tr>
+                <th th:text="#{ui.mypage_admin_news_hashtag_edit_list.003}">見出し</th>
+                <th th:text="#{user.role.th.action}">操作</th>
+              </tr>
+            </thead>
+            <!-- テーブル本体 -->
+            <tbody>
+              <!-- 繰り返し表示行 -->
+              <tr th:each="newsItem : ${newsList}">
+                <td style="max-width: 640px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis" th:text="${newsItem.title}">見出し</td>
+                <td>
+                  <!-- 画面遷移用フォーム -->
+                  <form th:action="@{|/mypage/admin/news/${newsItem.id}/hashtag/edit|}" method="get" style="display: inline">
+                    <!-- 操作ボタン -->
+                    <button type="submit" class="btn" th:text="#{ui.mypage_admin_news_hashtag_edit_list.004}">編集</button>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- 戻るボタンは「ニュース/記事の有効・無効切替」画面と同じ、カード下部に配置 -->
+          <div class="row-actions">
+            <!-- 画面遷移リンク -->
+            <a class="btn link" th:href="@{/mypage}" th:text="#{common.back_to_mypage}">各機能ページ一覧へ戻る</a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

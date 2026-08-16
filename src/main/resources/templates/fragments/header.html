@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- 共通ヘッダーフラグメント -->
+<header
+  class="site-header"
+  th:fragment="siteHeader"
+  xmlns:th="http://www.thymeleaf.org"
+  th:attr="data-idle-timeout-millis=${idleTimeoutMillis}"
+>
+  <!-- 画面上部の共通ヘッダー -->
+  <div class="site-header__left">
+    <!-- 直前ページへ戻る（ブラウザ履歴） -->
+    <a
+      class="btn-link"
+      href="#"
+      onclick="history.back(); return false;"
+      th:text="#{ui.fragments_header.003}"
+    >
+      前ページへ</a>
+  </div>
+
+  <!-- サイトタイトル導線 -->
+  <div class="site-header__center">
+    <!-- トップへ戻る -->
+    <a th:href="@{/}" th:attr="aria-label=#{ui.fragments_header.002}">
+      <img class="site-title-img"
+           th:src="@{/img/site-title.svg}"
+           th:alt="#{site.title}"
+           alt="Spring Web News"
+      />
+    </a>
+  </div>
+
+  <!-- 右上のアカウント操作領域 -->
+  <div class="site-header__right">
+    <!-- ログアウト（POST /logout） -->
+    <form th:action="@{/logout}" method="post" id="logoutForm" data-logout-form="true">
+      <!-- 操作ボタン -->
+      <button class="btn-link" type="submit" th:text="#{ui.fragments_header.001}">ログアウト</button>
+    </form>
+  </div>
+
+  <!-- 無操作タイムアウト処理を読み込む（@{/js/idle_timeout.js}） -->
+  <script th:src="@{/js/idle_timeout.js}" defer></script>
+
+</header>

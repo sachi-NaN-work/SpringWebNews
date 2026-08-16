@@ -1,0 +1,8 @@
+MODEL LICENSE
+
+This file is intentionally separate from the code license.
+
+- The sample ONNX model (when you add one) should have its own license terms.
+- Place the model under `src/main/resources/model/rec.onnx` (or override `rec.model.path`).
+
+TODO: specify model license.

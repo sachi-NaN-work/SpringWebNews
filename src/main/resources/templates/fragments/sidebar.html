@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <!-- body 要素 -->
+  <body>
+    <!-- サイド領域 -->
+    <aside
+      class="main-left"
+      th:fragment="leftMenu(categories, selectedCategory, favorites, categoryNameById)"
+    >
+
+      <!-- 全件表示 -->
+      <ul>
+        <li>
+          <a th:href="@{/(category='all')}"
+             th:classappend="${selectedCategory == 'all' ? ' active' : ''}"
+             th:text="#{page.center.all}">
+            全件表示
+          </a>
+        </li>
+      </ul>
+
+      <!-- カテゴリ別表示 -->
+      <div class="category-section">
+        <h2 th:text="#{ui.fragments_sidebar.001}">カテゴリ別表示</h2>
+        <ul>
+          <li th:each="category : ${categories}">
+            <a th:href="@{|/?category=${category.slug}|}"
+               th:text="'・' + ${category.name}"
+               th:classappend="${selectedCategory == category.slug ? ' active' : ''}"
+            >
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- レイアウト用コンテナ -->
+      <div class="fav-section">
+        <!-- セクション見出し -->
+        <h2 th:text="#{ui.fragments_sidebar.002}">お気に入り</h2>
+
+        <!-- 一覧リスト -->
+        <ul id="favList" class="fav-list">
+          <!-- お気に入りが空の場合のメッセージ -->
+          <li
+            id="favEmpty"
+            th:if="${favorites == null || #lists.isEmpty(favorites)}"
+            class="fav-empty"
+            th:text="#{common.none_paren}"
+          >
+            （なし）
+          </li>
+
+          <!-- 繰り返し表示項目 -->
+          <li th:each="favoriteNews : ${favorites}" th:attr="data-news-id=${favoriteNews.id}"
+              th:with="favCategoryName=${favoriteNews.categoryId != null ? categoryNameById[favoriteNews.categoryId.toString()] : null},
+                favDisplayTitle=${favCategoryName != null ? '【' + favCategoryName + '】' + favoriteNews.title : favoriteNews.title}"
+          >
+            <!-- 操作ボタン -->
+            <button type="button"
+                    class="fav-remove"
+                    data-fav-remove="1"
+                    th:attr="data-news-id=${favoriteNews.id}, data-title=${favDisplayTitle}, aria-label=#{ui.fragments_sidebar.004}"
+                    aria-label="お気に入りから削除"
+            >
+              <span class="fav-icon">★</span>
+            </button>
+            <!-- リンク（遷移先: @{|/news/${favoriteNews.id}?src=fav|}） -->
+            <a th:href="@{|/news/${favoriteNews.id}?src=fav|}" th:text="${favDisplayTitle}"></a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 確認ダイアログ -->
+      <dialog id="favConfirmDialog" class="fav-dialog">
+        <!-- フォーム -->
+        <form method="dialog" class="fav-dialog__form">
+          <p id="favConfirmMessage" class="fav-dialog__title" th:text="#{ui.fragments_sidebar.003}">お気に入りから削除しますか？</p>
+          <!-- ダイアログ操作領域 -->
+          <div class="fav-dialog__actions">
+            <!-- 操作ボタン -->
+            <button value="yes" class="fav-dialog__btn fav-dialog__btn--primary" th:text="#{common.yes}">はい</button>
+            <!-- 操作ボタン -->
+            <button value="no" class="fav-dialog__btn" th:text="#{common.no}">いいえ</button>
+          </div>
+        </form>
+      </dialog>
+    </aside>
+  </body>
+</html>

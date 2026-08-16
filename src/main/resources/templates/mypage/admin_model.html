@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <!-- head 要素 -->
+  <head>
+    <!-- 文字コードを指定（UTF-8） -->
+    <meta charset="utf-8" />
+    <!-- viewport を設定（画面の幅を「端末の実際の幅」に合わせる・初期表示のズーム倍率を100%） -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 外部 CSS を読み込む（@{/css/site.css}） -->
+    <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <!-- 外部 CSS を読み込む（@{/css/mypage/admin_model.css}） -->
+    <link rel="stylesheet" th:href="@{/css/mypage/admin_model.css}" />
+    <!-- タイトル -->
+    <title th:text="#{ui.title.007}">Spring Web News - Admin</title>
+    <!-- アイコンを読み込む -->
+    <th:block th:replace="~{fragments/icon :: icon}"></th:block>
+  </head>
+  <!-- body 要素 -->
+  <body>
+    <!-- 共通フラグメント読込（~{fragments/header :: siteHeader}） -->
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
+
+    <!-- レイアウト用コンテナ -->
+    <div class="wrap">
+      <!-- グリッドレイアウト -->
+      <div class="grid">
+        
+        <!-- 成功メッセージを表示 -->
+        <div th:if="${msg != null}" class="msg" th:text="${msg}"></div>
+        <!-- 警告メッセージを表示 -->
+        <div th:if="${warn != null}" class="warn" th:text="${warn}"></div>
+        <!-- エラーメッセージを表示 -->
+        <div th:if="${err != null}" class="err" th:text="${err}"></div>
+
+        <!-- メインカード -->
+        <section class="card">
+          <!-- 見出し -->
+          <h1 class="title" th:text="#{model.h1}">
+            学習モデルの作成・読込（MODEL_MGR：学習モデル管理ロール）
+          </h1>
+
+          <!-- 補足メッセージ -->
+          <div class="small" style="margin-bottom: 10px" th:text="#{model.note}">
+            ※ 学習は外部Pythonを実行します。requirements.txt を事前にインストールしてください。
+          </div>
+
+          <!-- フォーム（送信先: @{/mypage/admin/model/train}） -->
+          <form method="post" th:action="@{/mypage/admin/model/train}" style="margin-bottom: 10px">
+            <!-- 送信ボタン -->
+            <button class="btn" type="submit" th:text="#{model.button.train}">
+              新規の学習モデルを作成して読込
+            </button>
+          </form>
+
+          <!-- フォーム（送信先: @{/mypage/admin/model/reload}） -->
+          <form method="post" th:action="@{/mypage/admin/model/reload}" style="margin-bottom: 10px">
+            <!-- 送信ボタン -->
+            <button class="btn" type="submit" th:text="#{model.button.reload}">
+              既存の学習モデルを再読込
+            </button>
+          </form>
+
+          <!-- 補足メッセージ -->
+          <div class="small" style="margin: 10px 0" th:text="#{model.label.last_log}">
+            直近ログ
+          </div>
+          <!-- 複数行入力欄 -->
+          <textarea readonly th:text="${lastModelOpLog}"></textarea>
+
+          <div style="margin-top: 12px">
+            <!-- リンク -->
+            <a
+              class="btn"
+              th:href="@{/mypage}"
+              style="text-decoration: none"
+              th:text="#{common.back_to_mypage}"
+            >
+              各機能ページ一覧へ戻る</a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

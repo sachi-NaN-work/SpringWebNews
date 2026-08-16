@@ -1,0 +1,183 @@
+/* スタイル定義（対象: body） */
+body {
+  /* フォントを指定（system-ui, -apple-system, Segoe UI, Roboto, sans-serif） */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  /* 余白を設定（0） */
+  margin: 0;
+}
+
+/* スタイル定義（対象: .wrap） */
+.wrap {
+  /* 最大幅を設定（980px） */
+  max-width: 980px;
+  /* 余白を設定（0 auto） */
+  margin: 0 auto;
+  /* 内側余白を設定（12px） */
+  padding: 12px;
+}
+
+/* スタイル定義（対象: .grid） */
+.grid {
+  /* 表示形式を設定（grid） */
+  display: grid;
+  /* グリッド列幅を設定（1fr） */
+  grid-template-columns: 1fr;
+  /* 要素間の間隔を設定（12px） */
+  gap: 12px;
+}
+
+/* スタイル定義（対象: .card） */
+.card {
+  /* 背景を設定（#ffffff） */
+  background: #ffffff;
+  /* 角丸を設定（10px） */
+  border-radius: 10px;
+  /* 内側余白を設定（12px） */
+  padding: 12px;
+}
+
+/* スタイル定義（対象: .title） */
+.title {
+  /* 文字サイズを設定（18px） */
+  font-size: 18px;
+  /* 余白を設定（0 0 10px） */
+  margin: 0 0 10px;
+  /* 下側の内側余白を設定（8px） */
+  padding-bottom: 8px;
+  /* 下側の枠線を設定（4px solid #333） */
+  border-bottom: 4px solid #333;
+}
+
+/* スタイル定義（対象: .sub） */
+.sub {
+  /* 文字サイズを設定（14px） */
+  font-size: 14px;
+  /* 余白を設定（16px 0 10px） */
+  margin: 16px 0 10px;
+  /* 下側の内側余白を設定（6px） */
+  padding-bottom: 6px;
+  /* 下側の枠線を設定（2px solid #333） */
+  border-bottom: 2px solid #333;
+}
+
+/* スタイル定義（対象: .row） */
+.row {
+  /* 表示形式を設定（grid） */
+  display: grid;
+  /* グリッド列幅を設定（180px 1fr） */
+  grid-template-columns: 180px 1fr;
+  /* 要素間の間隔を設定（10px） */
+  gap: 10px;
+  /* 縦方向の揃えを設定（center） */
+  align-items: center;
+  /* 余白を設定（8px 0） */
+  margin: 8px 0;
+}
+
+/* スタイル定義（対象: label） */
+label {
+  /* 文字サイズを設定（12px） */
+  font-size: 12px;
+  /* 文字色を設定（#333） */
+  color: #333;
+}
+
+/* スタイル定義（対象: input, select, textarea） */
+input,
+select,
+textarea {
+  /* 幅を設定（100%） */
+  width: 100%;
+  /* 内側余白を設定（10px） */
+  padding: 10px;
+  /* 枠線を設定（1px solid #ccc） */
+  border: 1px solid #ccc;
+  /* 角丸を設定（8px） */
+  border-radius: 8px;
+  /* 幅計算方法を指定（border-box） */
+  box-sizing: border-box;
+}
+
+/* スタイル定義（対象: textarea） */
+textarea {
+  /* 最小高さを設定（120px） */
+  min-height: 120px;
+  /* リサイズ方向を指定（vertical） */
+  resize: vertical;
+}
+
+/* スタイル定義（対象: .actions） */
+.actions {
+  /* 表示形式を設定（flex） */
+  display: flex;
+  /* 要素間の間隔を設定（10px） */
+  gap: 10px;
+  /* 横方向の揃えを設定（flex-end） */
+  justify-content: flex-end;
+  /* 上側の余白を設定（10px） */
+  margin-top: 10px;
+}
+
+/* スタイル定義（対象: .msg） */
+.msg {
+  /* 背景を設定（#e7f7e7） */
+  background: #e7f7e7;
+  /* 枠線を設定（1px solid #6cc56c） */
+  border: 1px solid #6cc56c;
+  /* 文字色を設定（#1b6b1b） */
+  color: #1b6b1b;
+  /* 内側余白を設定（10px 12px） */
+  padding: 10px 12px;
+  /* 角丸を設定（10px） */
+  border-radius: 10px;
+}
+
+/* スタイル定義（対象: .err） */
+.err {
+  /* 背景を設定（#fde7e7） */
+  background: #fde7e7;
+  /* 枠線を設定（1px solid #e08a8a） */
+  border: 1px solid #e08a8a;
+  /* 文字色を設定（#9c1d1d） */
+  color: #9c1d1d;
+  /* 内側余白を設定（10px 12px） */
+  padding: 10px 12px;
+  /* 角丸を設定（10px） */
+  border-radius: 10px;
+}
+
+/* スタイル定義（対象: .small） */
+.small {
+  /* 文字サイズを設定（12px） */
+  font-size: 12px;
+  /* 文字色を設定（#444） */
+  color: #444;
+}
+
+/* スタイル定義（対象: .btn） */
+.btn {
+  /* ブラウザ標準の見た目を無効化（none） */
+  appearance: none;
+  /* 枠線を設定（1px solid #666） */
+  border: 1px solid #666;
+  /* 背景を設定（#e0e0e0） */
+  background: #e0e0e0;
+  /* 内側余白を設定（8px 12px） */
+  padding: 8px 12px;
+  /* 角丸を設定（10px） */
+  border-radius: 10px;
+  /* カーソル形状を設定（pointer） */
+  cursor: pointer;
+  /* 文字サイズを設定（14px） */
+  font-size: 14px;
+  /* 装飾（下線など）を設定（none） */
+  text-decoration: none;
+  /* 文字色を設定（#000） */
+  color: #000;
+}
+
+/* スタイル定義（対象: .btn:hover） */
+.btn:hover {
+  /* 背景を設定（#eee） */
+  background: #eee;
+}

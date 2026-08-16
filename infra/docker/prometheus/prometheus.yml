@@ -1,0 +1,24 @@
+# Prometheus の共通設定
+global:
+  # 監視情報を取得する間隔
+  scrape_interval: 15s
+
+# 監視情報の保存設定
+storage:
+  tsdb:
+    retention:
+      # 監視情報を3日間保存
+      time: 3d
+
+# 監視対象の設定
+scrape_configs:
+  # SpringWebNews の監視
+  - job_name: "spring-web-news"
+
+    # Spring Boot Actuator の Prometheus エンドポイント
+    metrics_path: /actuator/prometheus
+
+    # Docker 内の SpringWebNews へ接続
+    static_configs:
+      - targets:
+          - "app:8080"

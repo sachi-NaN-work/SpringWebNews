@@ -1,0 +1,155 @@
+# 共通設定
+
+# Spring Framework 全体の設定
+spring:
+  # アプリケーション情報の設定
+  application:
+    # アプリケーション名を指定
+    name: Spring-Web-News
+
+# アプリケーション独自の設定
+app:
+  # 画面に表示するリンク関連の設定
+  links:
+
+    # ログイン画面に表示するURLを指定
+    # link-url: "https://github.com/sachi-NaN"
+    # link-url: "https://github.com/sachi-NaN/SpringWebNews"
+
+    # ログイン画面に表示するコメントを指定
+    text-comment: |-
+      
+      
+      ● サーバーはプライベート PC のため、処理速度が遅くなることがあります。
+      
+      ● ブラウザ設定で Cookie データの保存をブロック等をしている場合、正常に作動しない可能性があります。
+      
+      ● アプリ内の「お気に入り」、「good」、「bad」等は、ご自由に操作していただいて構いません。
+      
+      ● アプリ内のデータは予告なく初期化する事があります。ご了承ください。
+      
+      ● アプリは予告なくサーバー停止 / 非公開にする事があります。ご了承ください。
+
+      
+
+# ニュース機能に関する設定
+news:
+  # TOP画面や分類画面で表示する最新ニュース件数を指定
+  latest-limit: 15
+
+# 推薦機能に関する設定
+rec:
+  # お気に入り機能の設定
+  favorites:
+    # お気に入りとして登録できる最大件数を指定
+    max-fav: 50
+
+  # 推薦で返却する記事件数のデフォルト値を指定
+  default-k: 20
+
+  # 学習時に使うイベントごとの重み設定
+  training-weight:
+    # お気に入り登録の重みを指定
+    favorite: 1.5
+    # good評価の重みを指定
+    good: 1.3
+    # 閲覧イベントの重みを指定
+    view: 1.0
+    # bad評価時の最小マイナス補正値を指定
+    bad-negative-min: 0.5
+    # bad評価時のマイナス補正倍率を指定
+    bad-negative-mult: 5.0
+
+  # リアルタイム推薦パラメータの設定
+  rt-rec:
+
+    # パーソナル推薦の候補サイズを指定
+    personal-candidate-size: 700
+    # グローバル推薦の候補サイズを指定
+    global-candidate-size: 700
+
+    # （ABテスト）A パターンの global枠割合
+    global-slot-ratio-a: 0.65
+    # （ABテスト）B パターンの global枠割合
+    global-slot-ratio-b: 0.35
+
+    # 同一カテゴリの最大採用比率を指定
+    max-per-category-ratio: 0.40
+    # 同一カテゴリの最大採用数の最低値を指定
+    max-per-category-min: 1
+
+    # personal 側で参照する上位カテゴリ数
+    personal-top-categories: 10
+
+    # 1カテゴリあたり取得する候補数
+    per-category-take: 10
+
+    # personal 側で参照する上位タグ数
+    personal-top-tags: 10
+
+    # 1タグあたり取得する候補数
+    per-tag-take: 10
+
+    # グローバル推薦のスキャン上限（0 は全件スキャン）
+    global-scan-limit: 0
+
+    # グローバル推薦の品質計算並列度
+    global-quality-concurrency: 32
+
+    # 品質ゲート：根拠数の最低値
+    evidence-min: 5
+
+    # 品質ゲート：quality の最低値
+    quality-min: 0.35
+
+    # 品質ゲートの調整係数
+    gate-multiplier: 0.2
+
+    # 全体露出補正
+    exposure-bucket0: 1.00
+    exposure-bucket1: 0.95
+    exposure-bucket2: 0.85
+    exposure-bucket3: 0.70
+
+    # ユーザー単位の繰り返し表示抑制
+    repeat-stage0: 1.00
+    repeat-stage1: 0.95
+    repeat-stage2: 0.70
+    repeat-stage3: 0.10
+
+    # repeatPenalty の share 調整係数
+    repeat-share-adj-coeff: 0.5
+
+    # repeatPenalty の share 調整上限
+    repeat-share-adj-cap: 0.2
+
+    # baseScore の露出側重み
+    base-exposure-weight: 0.35
+
+    # baseScore のユーザー一致側重み
+    base-user-match-weight: 0.65
+
+    # 有効閲覧とみなす閲覧時間
+    view-ms: 10
+
+    # A/Bテスト用ブースト方式
+    ab-boost-type: add
+
+    # A パターンのブースト値
+    ab-boost-a: 0.00
+
+    # B パターンのブースト値
+    ab-boost-b: 0.03
+
+    # モデル/固定係数がない場合の既定スコア
+    default-score-a: 0.0
+    default-score-b: 0.0
+
+    # A/Bテストの固定 salt
+    ab-salt: ""
+
+    # B パターンの割当割合
+    ab-b-percent: 10
+
+    # ランダム探索サイズを指定
+    explore-random: 500

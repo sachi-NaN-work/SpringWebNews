@@ -1,0 +1,333 @@
+/* スタイル定義（対象: bodyタグ） */
+body {
+  /* フォントを指定（system-ui, -apple-system, Segoe UI, Roboto, sans-serif） */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  /* 余白を設定（0） */
+  margin: 0;
+}
+
+/* スタイル定義（対象: .layout） */
+.layout {
+  /* 表示形式を設定（flex） */
+  display: flex;
+  /* 要素間の間隔を設定（12px） */
+  gap: 12px;
+  /* 内側余白を設定（12px） */
+  padding: 12px;
+  /* 各カラムを上揃えにして高さの引き伸ばしを防止 */
+  align-items: flex-start;
+}
+
+/* スタイル定義（対象: .main-left） */
+.main-left {
+  /* フレックス要素の伸縮を設定（1） */
+  flex: 1;
+}
+
+/* スタイル定義（対象: .main-center） */
+.main-center {
+  /* フレックス要素の伸縮を設定（2） */
+  flex: 2;
+  /* 表示形式を設定（flex） */
+  display: flex;
+  /* 並び方向を指定（column） */
+  flex-direction: column;
+}
+
+/* 下部固定領域（ハッシュタグ + good/bad） */
+.bottom-area {
+  /* 上側の外側余白を設定（100px） */
+  margin-top: 100px;
+}
+
+/* スタイル定義（対象: .main-right） */
+.main-right {
+  /* フレックス要素の伸縮を設定（1） */
+  flex: 1;
+}
+
+/* スタイル定義（対象: h1タグ） */
+h1 {
+  /* 文字サイズを設定（18px） */
+  font-size: 18px;
+  /* 余白を設定（0 0 12px） */
+  margin: 0 0 12px;
+}
+
+/* スタイル定義（対象: h2タグ） */
+h2 {
+  /* 文字サイズを設定（14px） */
+  font-size: 14px;
+  /* 余白を設定（0 0 12px） */
+  margin: 0 0 12px;
+}
+
+/* スタイル定義（対象: ulタグ） */
+ul {
+  /* リストのマーカーを設定（none） */
+  list-style: none;
+  /* 内側余白を設定（0） */
+  padding: 0;
+  /* 余白を設定（0） */
+  margin: 0;
+}
+
+/* スタイル定義（対象: liタグ） */
+li {
+  /* 余白を設定（8px 0） */
+  margin: 8px 0;
+}
+
+/* スタイル定義（対象: aタグ） */
+a {
+  /* 装飾（下線など）を設定（none） */
+  text-decoration: none;
+}
+
+/* スタイル定義（対象: .body） */
+.body {
+  /* 空白・改行・折返しを設定（pre-wrap） */
+  white-space: pre-wrap;
+  /* 行間を設定（1.6） */
+  line-height: 1.6;
+}
+
+/* スタイル定義（対象: .section-title） */
+.section-title {
+  /* 下側の内側余白を設定（8px） */
+  padding-bottom: 8px;
+  /* 下側の枠線を設定（4px solid #333） */
+  border-bottom: 4px solid #333;
+  /* 下側の余白を設定（12px） */
+  margin-bottom: 12px;
+}
+
+/* スタイル定義（対象: .section-title-row） */
+.section-title-row {
+  /* 表示形式を設定（flex） */
+  display: flex;
+  /* 縦方向の揃えを設定（center） */
+  align-items: center;
+  /* 要素間の間隔を設定（10px） */
+  gap: 10px;
+  /* 下側の内側余白を設定（8px） */
+  padding-bottom: 8px;
+  /* 下側の枠線を設定（4px solid #333） */
+  border-bottom: 4px solid #333;
+  /* 下側の余白を設定（12px） */
+  margin-bottom: 12px;
+}
+
+/* スタイル定義（対象: .section-title） */
+.section-title {
+  /* 下側の枠線を設定（0） */
+  border-bottom: 0;
+  /* 余白を設定（0） */
+  margin: 0;
+  /* 内側余白を設定（0） */
+  padding: 0;
+}
+
+/* スタイル定義（対象: .fav-btn） */
+.fav-btn {
+  /* 背景を設定（transparent） */
+  background: transparent;
+  /* 枠線を設定（0） */
+  border: 0;
+  /* カーソル形状を設定（pointer） */
+  cursor: pointer;
+  /* 文字サイズを設定（26px） */
+  font-size: 26px;
+  /* 行間を設定（1） */
+  line-height: 1;
+  /* 内側余白を設定（0 4px） */
+  padding: 0 4px;
+}
+
+/* スタイル定義（対象: .fav-btn:active） */
+.fav-btn:active {
+  /* 変形を指定（translateY(1px)） */
+  transform: translateY(1px);
+}
+
+/* スタイル定義（対象: .fav-icon） */
+.fav-icon {
+  /* 文字色を設定（#333） */
+  color: #333;
+  /* アニメーション遷移を指定（color 0.15s ease-in-out） */
+  transition: color 0.15s ease-in-out;
+}
+
+/* スタイル定義（対象: .fav-btn.is-fav .fav-icon） */
+.fav-btn.is-fav .fav-icon {
+  /* 文字色を設定（#f5c400） */
+  color: #f5c400;
+}
+
+/* スタイル定義（対象: .hashtags） */
+.hashtags {
+  /* 余白を設定（上 12px） */
+  margin: 12px 0 0;
+  /* 文字サイズを設定（0.9em） */
+  font-size: 0.9em;
+}
+
+/* スタイル定義（対象: .hashtag） */
+.hashtag {
+  /* 右側余白を設定（8px） */
+  margin-right: 8px;
+}
+
+/* good/bad ボタン領域 */
+.reactions {
+  /* 上余白 */
+  margin: 14px 0 0;
+  /* 表示形式を設定（flex） */
+  display: flex;
+  /* 縦方向の揃えを設定（center） */
+  align-items: center;
+  /* 要素間の間隔を設定（8px） */
+  gap: 8px;
+}
+
+/* good/bad ボタン */
+.reaction-btn {
+  /* 枠線を設定（1px solid #ccc） */
+  border: 1px solid #ccc;
+  /* 初期（無効/未選択）＝薄グレー */
+  background: #eee;
+  /* 内側余白を設定（6px 10px） */
+  padding: 6px 10px;
+  /* 角丸を設定（8px） */
+  border-radius: 8px;
+  /* カーソル形状を指定（pointer） */
+  cursor: pointer;
+  /* 横幅統一 */
+  min-width: 120px;
+  /* 文字揃えを指定（center） */
+  text-align: center;
+}
+
+/* good/bad ボタン（有効） */
+.reaction-btn.selected {
+  /* 有効＝ピンク */
+  background: #FA90ED;
+}
+
+/* good/bad ボタン（無効） */
+.reaction-btn:disabled {
+  /* 無効＝グレー */
+  background: #666666;
+  /* 色で状態が分かるように透明度は落とさない */
+  opacity: 1;
+  /* カーソル形状を指定（not-allowed） */
+  cursor: not-allowed;
+}
+
+/* good/bad ボタン（無効化するため上書き） */
+.reaction-btn.selected:disabled {
+  /* 選択済みでも無効化するため上書き */
+  background: #FA90ED;
+}
+
+/* スタイル定義（対象: .rec-item） */
+.rec-item {
+  /* 文字サイズを設定（13px） */
+  font-size: 13px;
+  /* 行間を設定（1.4） */
+  line-height: 1.4;
+}
+
+
+/* スタイル定義（対象: .rec-note） */
+.rec-note {
+  /* 下側の余白を設定（10px） */
+  margin: -6px 0 10px;
+  /* 文字サイズを設定（0.80em） */
+  font-size: 0.80em;
+  /* 行間を設定（1.5） */
+  line-height: 1.5;
+  /* 文字色を設定（#555） */
+  color: #555;
+  /* 空白文字と改行を表示に反映 */
+  white-space: pre-line;
+}
+
+/* スタイル定義（対象: .rec-link） */
+.rec-link {
+  /* 文字サイズを設定（1.05em） */
+  font-size: 1.05em;
+}
+
+/* スタイル定義（対象: .rec-score） */
+.rec-score {
+  /* 左側の余白を設定（6px） */
+  margin-left: 6px;
+  /* 文字サイズを設定（0.90em） */
+  font-size: 0.90em;
+  /* 文字色を設定（#666） */
+  color: #666;
+
+  /* 画面上では非表示に設定 */
+  /*  display: none;　*/
+
+}
+
+/* スタイル定義（対象: .rec-detail-section） */
+.rec-detail-section {
+  /* 上側の余白を設定（2px） */
+  margin-top: 2px;
+}
+
+/* スタイル定義（対象: .rec-detail-section summary） */
+.rec-detail-section summary {
+  /* マウスカーソルを設定（pointer） */
+  cursor: pointer;
+  /* 文字サイズを設定（0.90em） */
+  font-size: 0.90em;
+  /* 行間を設定（1.5） */
+  line-height: 1.5;
+  /* 文字色を設定（#00a6d6） */
+  color: #00a6d6;
+  /* 装飾（下線など）を設定（underline） */
+  text-decoration: underline;
+}
+
+
+/* スタイル定義（対象: .rec-detail-section summary::marker） */
+.rec-detail-section summary::marker {
+  /* 既定の開閉マーカーを非表示に設定 */
+  content: "";
+}
+
+/* スタイル定義（対象: .rec-detail-section summary::-webkit-details-marker） */
+.rec-detail-section summary::-webkit-details-marker {
+  /* 既定の開閉マーカーを非表示に設定 */
+  display: none;
+}
+
+/* スタイル定義（対象: .rec-detail） */
+.rec-detail {
+  /* 表示形式を設定（block） */
+  display: block;
+  /* 上側の余白を設定（2px） */
+  margin-top: 2px;
+  /* 下側の余白を設定（6px） */
+  margin-bottom: 6px;
+  /* 文字サイズを設定（0.90em） */
+  font-size: 0.90em;
+  /* 行間を設定（1.5） */
+  line-height: 1.5;
+  /* 文字色を設定（#333） */
+  color: #333;
+  /* 背景色を設定（#fafafa） */
+  background: #fafafa;
+  /* 枠線を設定（1px solid #eee） */
+  border: 1px solid #eee;
+  /* 内側余白を設定（6px） */
+  padding: 6px;
+  /* はみ出し時の横スクロールを設定（auto） */
+  overflow-x: auto;
+  /* 空白と改行の扱いを設定（pre-wrap） */
+  white-space: pre-wrap;
+}

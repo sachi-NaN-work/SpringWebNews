@@ -1,0 +1,97 @@
+# prod 環境向け
+
+# アプリケーションを起動するサーバー設定
+server:
+  # 使用するポート番号を指定
+  port: ${SERVER_PORT:0}
+
+# Spring Framework 全体の設定
+spring:
+  # R2DBC の設定
+  r2dbc:
+    # データベース接続先URLを指定
+    url: ${R2DBC_URL:}
+    # データベース接続に使うユーザー名
+    username: ${DB_USER:}
+    # データベース接続に使うパスワード
+    password: ${DB_PASS:}
+
+  # Spring Data 関連の設定
+  data:
+    # Redis の接続設定
+    redis:
+      # Redis サーバーのホスト名またはIPアドレス
+      host: ${REDIS_HOST:}
+      # Redis サーバーのポート番号
+      port: ${REDIS_PORT:0}
+      # Redis 接続時のパスワード
+      password: ${REDIS_PASSWORD:}
+
+  # Kafka の設定
+  kafka:
+    # Kafka ブローカーの接続先を指定
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:}
+
+# springdoc の設定
+springdoc:
+  # OpenAPI 定義ファイルの設定
+  api-docs:
+    # OpenAPI ドキュメントを有効にするかどうか
+    enabled: ${SPRINGDOC_ENABLED:false}
+
+  # Swagger UI の設定
+  swagger-ui:
+    # Swagger UI を有効にするかどうか
+    enabled: ${SPRINGDOC_ENABLED:false}
+
+# Spring Boot Actuator の管理・監視設定
+management:
+  # Actuator のエンドポイント設定
+  endpoints:
+    # Web経由で公開するActuatorエンドポイントの設定
+    web:
+      # 外部に公開するエンドポイントを指定
+      exposure:
+        # 公開するActuatorエンドポイントを指定
+        include: ${MANAGEMENT_EXPOSE:health,info}
+
+  # 個別エンドポイントの詳細設定
+  endpoint:
+    # health エンドポイントの設定
+    health:
+      # Kubernetes などの環境で使うヘルスチェック用プローブ設定
+      probes:
+        # readiness / liveness probe 用の情報を有効にする
+        enabled: true
+
+# アプリケーション独自の設定
+app:
+  # セキュリティ関連の独自設定
+  security:
+    # 認証なしでアクセスを許可するURL一覧
+    permit-all:
+      # ログイン画面へのアクセスを許可
+      - /login
+      # タイムアウト処理へのアクセスを許可
+      - /timeout
+      # 共通エラー画面へのアクセスを許可
+      - /error
+      # CSSファイルへのアクセスを許可
+      - /css/**
+      # JavaScriptファイルへのアクセスを許可
+      - /js/**
+      # 画像ファイル用ディレクトリへのアクセスを許可
+      - /img/**
+      # 画像ファイル用ディレクトリへのアクセスを許可
+      - /images/**
+      # favicon へのアクセスを許可
+      - /favicon.ico
+      # Actuator の health エンドポイントへのアクセスを許可
+      - /actuator/health/**
+      # Actuator の info エンドポイントへのアクセスを許可
+      - /actuator/info
+
+    # タイムアウト関連の独自設定
+    idle-timeout:
+      # タイムアウト時間
+      duration: 30m

@@ -1,0 +1,26 @@
+{
+  "feature_order": [
+    "exposure",
+    "cat_viewShare",
+    "cat_favShare",
+    "cat_goodShare",
+    "cat_badShare",
+    "strongest_tag_viewShare",
+    "strongest_tag_favShare",
+    "strongest_tag_goodShare",
+    "strongest_tag_badShare"
+  ],
+  "weights": [
+    0.1673145592212677,
+    0.6396811008453369,
+    -0.047198470681905746,
+    -0.9391807913780212,
+    -1.9897024631500244,
+    0.27781859040260315,
+    -0.04303787648677826,
+    -0.03364331275224686,
+    -0.009925134479999542
+  ],
+  "bias": 0.6771254539489746,
+  "default_score": 0.0
+}

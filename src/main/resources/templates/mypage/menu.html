@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <!-- head 要素 -->
+  <head>
+    <!-- 文字コードを指定（UTF-8） -->
+    <meta charset="utf-8" />
+    <!-- viewport を設定（画面の幅を「端末の実際の幅」に合わせる・初期表示のズーム倍率を100%） -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 外部 CSS を読み込む（@{/css/site.css}） -->
+    <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <!-- 外部 CSS を読み込む（@{/css/mypage/menu.css}） -->
+    <link rel="stylesheet" th:href="@{/css/mypage/menu.css}" />
+    <!-- タイトル -->
+    <title th:text="#{ui.title.006}">Spring Web News - MyPage</title>
+    <!-- アイコンを読み込む -->
+    <th:block th:replace="~{fragments/icon :: icon}"></th:block>
+  </head>
+  <!-- body 要素 -->
+  <body>
+    <!-- 共通フラグメント読込（~{fragments/header :: siteHeader}） -->
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
+
+    <!-- レイアウト用コンテナ -->
+    <div class="wrap">
+      <!-- グリッドレイアウト -->
+      <div class="grid">
+        <!-- 成功メッセージを表示 -->
+        <div th:if="${msg != null}" class="msg" th:text="${msg}"></div>
+
+        <!-- エラーメッセージを表示 -->
+        <div th:if="${err != null}" class="err" th:text="${err}"></div>
+
+        <!-- メインカード -->
+        <section class="card">
+          <!-- 見出し -->
+          <h1 class="title" th:text="#{mypage.h1}">マイページ</h1>
+
+          <div class="row">
+            <!-- 補足メッセージ -->
+            <div class="small" th:text="#{mypage.label.username}">ユーザーID</div>
+            <div th:text="${me.username}">demo</div>
+          </div>
+          <div class="row">
+            <!-- 補足メッセージ -->
+            <div class="small" th:text="#{mypage.label.role}">ロール</div>
+            <div>
+              <span th:text="${me.role}">USER</span>
+              <span
+                th:if="${isAdmin}"
+                class="badge"
+                style="margin-left: 8px"
+                th:text="#{mypage.badge.admin}"
+              >
+                管理者</span>
+            </div>
+          </div>
+          <div class="row">
+            <!-- 補足メッセージ -->
+            <div class="small" th:text="#{mypage.label.status}">状態</div>
+            <div th:text="${me.enabled} ? #{common.enabled} : #{common.disabled}">有効</div>
+          </div>
+
+          <!-- セクション見出し -->
+          <h2 class="sub" th:text="#{mypage.h2.feature_list}">各機能ページ一覧</h2>
+          <!-- メニュー領域 -->
+          <ul class="menu">
+
+            <!-- USER -->
+            <th:block th:if="${canPasswordChange}">
+              <li class="menu-section"><span class="menu-section-title">USER</span></li>
+              <li>
+                <!-- リンク（遷移先: @{/mypage/password}） -->
+                <a class="menuLink" th:href="@{/mypage/password}" th:text="#{mypage.menu.password}">パスワード変更</a>
+              </li>
+            </th:block>
+
+            <!-- USER_MGR -->
+            <th:block th:if="${canUserCreate or canUserEnabled or canUserRole}">
+              <li class="menu-section"><span class="menu-section-title">USER_MGR</span></li>
+
+              <li th:if="${canUserCreate}">
+                <!-- 画面遷移リンク -->
+                <a class="menuLink" th:href="@{/mypage/admin/user/create}" th:text="#{mypage.menu.user.create}">ユーザーの新規追加（USER_MGR：ユーザー管理ロール）</a>
+              </li>
+
+              <li th:if="${canUserEnabled}">
+                <!-- 画面遷移リンク -->
+                <a class="menuLink" th:href="@{/mypage/admin/user/enabled}" th:text="#{mypage.menu.user.enabled}">ユーザーの有効/無効化変更（USER_MGR：ユーザー管理ロール）</a>
+              </li>
+
+              <li th:if="${canUserRole}">
+                <!-- 画面遷移リンク -->
+                <a class="menuLink" th:href="@{/mypage/admin/user/role}" th:text="#{mypage.menu.user.role}">ユーザーのロール変更（USER_MGR：ユーザー管理ロール）</a>
+              </li>
+            </th:block>
+
+            <!-- MODEL_MGR -->
+            <th:block th:if="${canModelAny}">
+              <li class="menu-section"><span class="menu-section-title">MODEL_MGR</span></li>
+
+              <li>
+                <!-- 画面遷移リンク -->
+                <a class="menuLink" th:href="@{/mypage/admin/model}" th:text="#{mypage.menu.model}">学習モデルの作成・読込（MODEL_MGR：学習モデル管理ロール）</a>
+              </li>
+            </th:block>
+
+            <!-- NEWS_MGR -->
+            <th:block th:if="${canNewsCreateAny or canNewsDisableAny or canHashtagMaster or canNewsHashtagEdit}">
+              <li class="menu-section"><span class="menu-section-title">NEWS_MGR</span></li>
+
+              <li th:if="${canNewsCreateAny}">
+                <!-- 画面遷移リンク -->
+                <a class="menuLink" th:href="@{/mypage/admin/news/article/create}" th:text="#{mypage.menu.news.article.create}">ニュース/記事の作成（NEWS_MGR：ニュース管理ロール）</a>
+              </li>
+              <li th:if="${canNewsCreateAny}">
+                <!-- 画面遷移リンク -->
+                <a class="menuLink" th:href="@{/mypage/admin/news/category/create}" th:text="#{mypage.menu.news.category.create}">ニュース/カテゴリの作成（NEWS_MGR：ニュース管理ロール）</a>
+              </li>
+
+              <li th:if="${canNewsDisableAny}">
+                <!-- 画面遷移リンク -->
+                <a class="menuLink" th:href="@{/mypage/admin/news/article/disable}" th:text="#{mypage.menu.news.article.disable}">ニュース/記事の有効・無効切替（NEWS_MGR：ニュース管理ロール）</a>
+              </li>
+
+              <li th:if="${canNewsDisableAny}">
+                <!-- 画面遷移リンク -->
+                <a class="menuLink" th:href="@{/mypage/admin/news/category/disable}" th:text="#{mypage.menu.news.category.disable}">ニュース/カテゴリの有効・無効切替（NEWS_MGR：ニュース管理ロール）</a>
+              </li>
+
+              <!-- ハッシュタグ（マスタ管理） -->
+              <li th:if="${canHashtagMaster}">
+                <!-- 画面遷移リンク -->
+                <a class="menuLink" th:href="@{/mypage/admin/hashtag/master}" th:text="#{ui.mypage_menu.001}">ハッシュタグ一覧（マスタ）登録（NEWS_MGR：ニュース管理ロール）</a>
+              </li>
+
+              <!-- 既存ニュースのハッシュタグ編集 -->
+              <li th:if="${canNewsHashtagEdit}">
+                <!-- 画面遷移リンク -->
+                <a class="menuLink" th:href="@{/mypage/admin/news/hashtag/edit}" th:text="#{ui.mypage_menu.002}">既存ニュースのハッシュタグ編集（NEWS_MGR：ニュース管理ロール）</a>
+              </li>
+            </th:block>
+          </ul>
+
+          <!-- 補足メッセージ -->
+          <div
+            th:if="${!canUserCreate and !canUserEnabled and !canUserRole and !canModelAny and !canNewsCreateAny and !canNewsDisableAny and !canHashtagMaster and !canNewsHashtagEdit}"
+            class="small"
+            style="margin-top: 10px"
+            th:text="#{mypage.note.permission_only}"
+          >
+            ※ 管理機能は権限を持つユーザーのみ表示されます。
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

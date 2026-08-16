@@ -1,0 +1,53 @@
+# --- ビルドツール ---
+/build/
+/gradle/
+/.gradle/
+/perf/
+
+# --- 統合開発環境（IDE） ---
+/.idea/
+/.vscode/
+*.iml
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Logs / temp ---
+*.log
+*.tmp
+
+# --- Env / secrets ---
+.env
+
+# --- Python (training) ---
+/.venv/
+.pytest_cache/
+__pycache__/
+*.pyc
+
+# --- 初期データ（認証情報の保護） ---
+/infra/docker/postgres/init/seed/30_users.local.sql
+
+# --- ダミーフォルダ ---
+/dummy/
+
+# --- 試験 ---
+/config/application-integration.yml/
+/src/integrationTest/
+/src/systemTest/
+/src/test/
+/src/config/application-integration.yml
+/training/tests/
+
+# --- 作業フォルダ -
+src_old/
+training_old/
+PowerShell/
+doc/
+document/90_WBS.md
+work/
+
+# --- URL 公開用 ---
+/docker-compose.tunnel.yml
+/docker-compose.tunnel.random.yml

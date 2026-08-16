@@ -1,0 +1,25 @@
+{
+  "ts": "2026-08-11 16:31:38",
+  "source_weights": {
+    "rec": 1.0,
+    "category": 0.6,
+    "latest": 0.4,
+    "external": 0.2,
+    "unknown": 0.3
+  },
+  "trained": true,
+  "feedback_rows": 2731,
+  "model_file": "rec.onnx.tmp",
+  "fixed_params_file": "rec_fixed_params.json",
+  "type_weights": {
+    "favorite": 2.0,
+    "good": 1.5,
+    "view": 1.0
+  },
+  "dataset_rows": 2688,
+  "neg_per_pos": 0,
+  "ridge_alpha": 1.0,
+  "negative_weight": 0.1,
+  "bad_negative_weight_min": 0.5,
+  "bad_negative_weight_mult": 5.0
+}

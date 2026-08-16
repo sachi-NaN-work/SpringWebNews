@@ -1,0 +1,329 @@
+/* スタイル定義（対象: body） */
+body {
+  /* 余白を設定（0） */
+  margin: 0;
+  /* 背景を設定（#bdbdbd） */
+  background: #bdbdbd;
+  /* フォントを指定（system-ui, -apple-system, "Segoe UI", Arial, sans-serif） */
+  font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  /* 上側の内側余白を設定（0） */
+  padding-top: 0;
+}
+
+/* スタイル定義（対象: .login-wrap） */
+.login-wrap {
+  /* 最小高さを設定（100vh） */
+  min-height: 100vh;
+  /* 表示形式を設定（flex） */
+  display: flex;
+  /* 縦方向の揃えを設定（center） */
+  align-items: center;
+  /* 横方向の揃えを設定（center） */
+  justify-content: center;
+  /* 内側余白を設定（24px） */
+  padding: 24px;
+}
+
+/* スタイル定義（対象: .login-card） */
+.login-card {
+  /* 幅を設定（min(520px, 100%)） */
+  width: min(520px, 100%);
+  /* 背景を設定（#bfe9ff） */
+  background: #bfe9ff;
+  /* 内側余白を設定（20px 22px） */
+  padding: 20px 22px;
+  /* 影を設定（0 8px 24px rgba(0, 0, 0, 0.15)） */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  /* 枠線を設定（none） */
+  border: none;
+  /* 角丸を設定（14px） */
+  border-radius: 14px;
+}
+
+/* スタイル定義（対象: .login-card h1） */
+.login-card h1 {
+  /* 表示形式を設定（table） */
+  display: table;
+  /* 余白を設定（0 auto 14px） */
+  margin: 0 auto 14px;
+  /* 文字揃えを指定（center） */
+  text-align: center;
+  /* 文字サイズを設定（28px） */
+  font-size: 28px;
+  /* 背景色を設定（#000000） */
+  background: #000000;
+  /* 文字色を設定（#ffffff） */
+  color: #ffffff;
+  /* 角丸を設定（0） */
+  border-radius: 0;
+  /* 内側余白を設定（10px 12px） */
+  padding: 10px 12px;
+}
+
+/* スタイル定義（対象: .login-card label） */
+.login-card label {
+  /* 表示形式を設定（block） */
+  display: block;
+  /* 余白を設定（10px 0 6px） */
+  margin: 10px 0 6px;
+  /* 文字の太さを設定（600） */
+  font-weight: 600;
+}
+
+/* スタイル定義（対象: .login-card input[type="text"], .login-card input[type="password"]） */
+.login-card input[type="text"],
+.login-card input[type="password"] {
+  /* 幅を設定（100%） */
+  width: 100%;
+  /* 内側余白を設定（10px 12px） */
+  padding: 10px 12px;
+  /* 角丸を設定（10px） */
+  border-radius: 10px;
+  /* 枠線を設定（1px solid #777） */
+  border: 1px solid #777;
+  /* 幅計算方法を指定（border-box） */
+  box-sizing: border-box;
+  /* 背景を設定（#fff） */
+  background: #fff;
+}
+
+/* スタイル定義（対象: .login-card button） */
+.login-card button {
+  /* 表示形式を設定（block） */
+  display: block;
+  /* 上側の外側余白を設定（14px） */
+  margin: 14px auto 0;
+  /* 幅を設定（160px） */
+  width: 160px;
+  /* 高さを設定（50px） */
+  height: 50px;
+  /* 内側余白を設定（0） */
+  padding: 0;
+  /* 角丸を設定（8px） */
+  border-radius: 8px;
+  /* 枠線を設定（1px solid #666） */
+  border: 1px solid #666;
+  /* 背景を設定（#e0e0e0） */
+  background: #e0e0e0;
+  /* 文字の太さを設定（550） */
+  font-weight: 550;
+  /* 文字サイズを設定（16px） */
+  font-size: 16px;
+  /* カーソル形状を設定（pointer） */
+  cursor: pointer;
+}
+
+/* スタイル定義（対象: .login-card button:hover） */
+.login-card button:hover {
+  /* 背景を設定（#cfcfcf） */
+  background: #cfcfcf;
+}
+
+/* スタイル定義（対象: .err） */
+.err {
+  /* 余白を設定（10px 0 0） */
+  margin: 10px 0 0;
+  /* 文字色を設定（#F50000） */
+  color: #F50000;
+  /* 文字の太さを設定（700） */
+  font-weight: 700;
+  /* 文字揃えを指定（center） */
+  text-align: center;
+  /* 文字サイズを設定（18px） */
+  font-size: 18px;
+  /* 背景色を設定（#F5F477） */
+  background: #F5F477;
+  /* 枠線を設定（2px solid #000000） */
+  border: 2px solid #000000;
+  /* 角丸を設定（8px） */
+  border-radius: 8px;
+  /* 内側余白を設定（10px 12px） */
+  padding: 10px 12px;
+}
+
+/* スタイル定義（対象: .login-card, .login-card:focus, .login-card:focus-within） */
+.login-card,
+.login-card:focus,
+.login-card:focus-within {
+  /* アウトラインを設定（none !important） */
+  outline: none !important;
+  /* 影を設定（none !important） */
+  box-shadow: none !important;
+}
+
+/* スタイル定義（対象: .login-card input:focus） */
+.login-card input:focus {
+  /* アウトラインを設定（none !important） */
+  outline: none !important;
+}
+
+/* スタイル定義（対象: .cookie-warning） */
+.cookie-warning {
+  /* 文字サイズを設定（18px） */
+  font-size: 18px;
+  /* 文字色を設定（#F50000） */
+  color: #F50000;
+  /* 文字の太さを設定（700） */
+  font-weight: 700;
+  /* 行の高さを設定（1.6） */
+  line-height: 1.6;
+  /* 背景色を設定（#F5F477） */
+  background: #F5F477;
+  /* 枠線を設定（2px solid #000000） */
+  border: 2px solid #000000;
+  /* 角丸を設定（8px） */
+  border-radius: 8px;
+  /* 内側余白を設定（10px 12px） */
+  padding: 10px 12px;
+  /* 余白を設定（10px 0 0） */
+  margin: 10px 0 0;
+  /* 文字揃えを指定（center） */
+  text-align: center;
+}
+
+/* スタイル定義（対象: .field-err） */
+.field-err {
+  /* 表示形式を設定（block） */
+  display: block;
+  /* 余白を設定（6px 0 10px） */
+  margin: 6px 0 10px;
+  /* 文字サイズを設定（18px） */
+  font-size: 18px;
+  /* 文字の太さを設定（700） */
+  font-weight: 700;
+  /* 文字色を設定（#F50000） */
+  color: #F50000;
+  /* 最小高さを設定（16px） */
+  min-height: 16px;
+}
+
+/* スタイル定義（対象: .field-err:not(:empty)） */
+.field-err:not(:empty) {
+  /* 背景色を設定（#F5F477） */
+  background: #F5F477;
+  /* 枠線を設定（2px solid #000000） */
+  border: 2px solid #000000;
+  /* 角丸を設定（8px） */
+  border-radius: 8px;
+  /* 内側余白を設定（10px 12px） */
+  padding: 10px 12px;
+  /* 文字揃えを指定（center） */
+  text-align: center;
+}
+
+/* スタイル定義（対象: body） */
+body {
+  /* フォントを指定（system-ui, -apple-system, Segoe UI, Roboto, sans-serif） */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  /* 余白を設定（0） */
+  margin: 0;
+}
+
+/* スタイル定義（対象: .wrap） */
+.wrap {
+  /* 最大幅を設定（420px） */
+  max-width: 420px;
+  /* 余白を設定（16px auto） */
+  margin: 16px auto;
+  /* 内側余白を設定（24px） */
+  padding: 24px;
+  /* 角丸を設定（12px） */
+  border-radius: 12px;
+}
+
+/* スタイル定義（対象: h1） */
+h1 {
+  /* 文字サイズを設定（20px） */
+  font-size: 20px;
+  /* 余白を設定（0 0 16px） */
+  margin: 0 0 16px;
+}
+
+/* スタイル定義（対象: label） */
+label {
+  /* 表示形式を設定（block） */
+  display: block;
+  /* 文字サイズを設定（18px） */
+  font-size: 18px;
+  /* 余白を設定（12px 0 6px） */
+  margin: 12px 0 6px;
+}
+
+/* スタイル定義（対象: input） */
+input {
+  /* 幅を設定（100%） */
+  width: 100%;
+  /* 内側余白を設定（10px） */
+  padding: 10px;
+  /* 枠線を設定（1px solid #ccc） */
+  border: 1px solid #ccc;
+  /* 角丸を設定（8px） */
+  border-radius: 8px;
+}
+
+/* スタイル定義（対象: .link） */
+.link {
+  /* 文字色を設定（#1a73e8） */
+  color: #1a73e8;
+  /* 装飾（下線など）を設定（none） */
+  text-decoration: none;
+}
+
+/* スタイル定義（対象: .link:hover） */
+.link:hover {
+  /* 装飾（下線など）を設定（underline） */
+  text-decoration: underline;
+}
+
+/* スタイル定義（対象: .linkUrl-wrap） */
+.linkUrl-wrap {
+  /* 上側の余白を設定（24px） */
+  margin-top: 24px;
+}
+
+/* スタイル定義（対象: .divider） */
+.divider {
+  /* 高さを設定（3px） */
+  height: 3px;
+  /* 幅を設定（100%） */
+  width: 100%;
+  /* 背景を設定（#000） */
+  background: #000;
+  /* 角丸を設定（2px） */
+  border-radius: 2px;
+  /* 余白を設定（0 0 18px） */
+  margin: 0 0 18px;
+}
+
+/* スタイル定義（対象: .linkUrl-line） */
+.linkUrl-line {
+  /* 余白を設定（0） */
+  margin: 0;
+  /* 太さを設定（700） */
+  font-weight: 700;
+}
+
+/* スタイル定義（対象: .linkUrl-line .link） */
+.linkUrl-line .link {
+  /* 太さを設定（700） */
+  font-weight: 700;
+  /* 文字サイズを設定（inherit） */
+  font-size: inherit;
+}
+
+/* スタイル定義（対象: .text-comment） */
+.text-comment {
+  /* 余白を設定（6px 0 0） */
+  margin: 6px 0 0;
+  /* 太さを設定（400） */
+  font-weight: 400;
+}
+
+/* スタイル定義（対象: .text-comment-value） */
+.text-comment-value {
+  /* 文字サイズを設定（10px） */
+  font-size: 10px;
+
+  /* 改行を表示（pre-line） */
+  white-space: pre-line;
+}

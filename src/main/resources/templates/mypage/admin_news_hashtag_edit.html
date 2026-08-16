@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <!-- head 要素 -->
+  <head>
+    <!-- 文字コードを指定（UTF-8） -->
+    <meta charset="utf-8" />
+    <!-- viewport を設定（画面の幅を「端末の実際の幅」に合わせる・初期表示のズーム倍率を100%） -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 外部 CSS を読み込む（@{/css/site.css}） -->
+    <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <!-- 外部 CSS を読み込む（@{/css/mypage/menu.css}） -->
+    <link rel="stylesheet" th:href="@{/css/mypage/menu.css}" />
+    <!-- 外部 CSS を読み込む（@{/css/hashtag_picker.css}） -->
+    <link rel="stylesheet" th:href="@{/css/hashtag_picker.css}" />
+    <!-- 外部 JS を読み込む（@{/js/hashtag_picker.js}） -->
+    <script th:src="@{/js/hashtag_picker.js}" defer></script>
+    <!-- タイトル -->
+    <title th:text="#{ui.title.007}">Spring Web News - Admin</title>
+    <!-- アイコンを読み込む -->
+    <th:block th:replace="~{fragments/icon :: icon}"></th:block>
+  </head>
+  <!-- body 要素 -->
+  <body>
+    <!-- 共通ヘッダー -->
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
+
+    <!-- 画面全体のラッパー -->
+    <div class="wrap">
+      <!-- グリッドレイアウト -->
+      <div class="grid">
+        <!-- 正常メッセージ表示領域 -->
+        <div th:if="${msg != null}" class="msg" th:text="${msg}"></div>
+        <!-- エラーメッセージ表示領域 -->
+        <div th:if="${err != null}" class="err" th:text="${err}"></div>
+
+        <!-- メインカード -->
+        <section class="card">
+          <!-- 画面見出し -->
+          <h1 class="title" th:text="#{ui.mypage_admin_news_hashtag_edit.002}">ニュースのハッシュタグ編集（最大５件まで選択可）</h1>
+          <div class="row">
+            <!-- 補足メッセージ -->
+            <div class="small" th:text="#{ui.mypage_admin_news_hashtag_edit.003}">対象ニュース</div>
+            <div th:text="${news.title}"></div>
+          </div>
+
+          <!-- 送信フォーム -->
+          <form th:action="@{|/mypage/admin/news/${news.id}/hashtag/edit|}" method="post" style="margin-top: 12px">
+            <!-- 入力時の注意事項 -->
+            <div class="hint" style="margin-bottom: 8px" th:text="#{ui.mypage_admin_news_hashtag_edit.004}">
+              ※ 未登録/無効のハッシュタグは保存できません（学習データ汚染防止）。
+            </div>
+
+            <!-- 入力ラベル -->
+            <label th:text="#{news.hashtag.ui.label.max5}">ハッシュタグ（最大５件まで選択可）</label>
+            <!-- ハッシュタグ検索領域 -->
+            <div class="tag-search">
+              <!-- テキスト入力欄 -->
+              <input
+                id="hashtagSearch"
+                type="text"
+                th:placeholder="#{news.hashtag.ui.search.placeholder}"
+                placeholder="ハッシュタグを検索"
+                autocomplete="off"
+                th:disabled="${allTags == null or #lists.isEmpty(allTags)}" th:attr="placeholder=#{news.hashtag.ui.search.placeholder}"
+              />
+            </div>
+            <div id="hashtagTooManyMsg" style="display:none" th:text="#{news.hashtag.err.too_many(5)}">ハッシュタグは最大5件まで選択できます。</div>
+            <!-- JS側でも “最低1件” を説明できるよう、文言は messages.properties から渡す -->
+            <div id="hashtagRequiredMsg" style="display:none" th:text="#{news.hashtag.err.required(1)}">ハッシュタグを最低1件選択してください。</div>
+            <div id="hashtagPickError" class="err" style="display:none"></div>
+
+            <!-- ハッシュタグが未登録の場合のメッセージ -->
+            <div class="small" th:if="${allTags == null or #lists.isEmpty(allTags)}" th:text="#{ui.mypage_admin_news_hashtag_edit.005}">（有効なハッシュタグがありません）</div>
+
+            <!-- 選択可能なハッシュタグ一覧 -->
+            <div id="hashtagList" class="tag-list" th:if="${allTags != null and !#lists.isEmpty(allTags)}">
+              <!-- 入力ラベル -->
+              <label class="tag-row" th:each="hashtag : ${allTags}" th:attr="data-name=${hashtag.name}">
+                <!-- チェックボックス -->
+                <input type="checkbox" name="hashtagIds" th:value="${hashtag.id}" th:checked="${selectedIds != null and selectedIds.contains(hashtag.id)}" />
+                <span th:text="${'#' + hashtag.name}"></span>
+              </label>
+            </div>
+
+            <!-- 操作ボタン群 -->
+            <div class="actions" style="margin-top: 12px">
+              <!-- 操作ボタン -->
+              <button class="btn" type="submit" th:text="#{ui.mypage_admin_news_hashtag_edit.006}">保存</button>
+              <!-- 画面遷移リンク -->
+              <a class="btn" th:href="@{/mypage/admin/news/hashtag/edit}" style="text-decoration:none" th:text="#{news.hashtag.edit.back_to_list}">既存ニュースのハッシュタグ編集へ戻る</a>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

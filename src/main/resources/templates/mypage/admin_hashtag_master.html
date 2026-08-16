@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <!-- head 要素 -->
+  <head>
+    <!-- 文字コードを指定（UTF-8） -->
+    <meta charset="utf-8" />
+    <!-- viewport を設定（画面の幅を「端末の実際の幅」に合わせる・初期表示のズーム倍率を100%） -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 外部 CSS を読み込む（@{/css/site.css}） -->
+    <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <!-- 外部 CSS を読み込む（@{/css/mypage/menu.css}） -->
+    <link rel="stylesheet" th:href="@{/css/mypage/menu.css}" />
+    <!-- タイトル -->
+    <title th:text="#{ui.title.007}">Spring Web News - Admin</title>
+    <!-- アイコンを読み込む -->
+    <th:block th:replace="~{fragments/icon :: icon}"></th:block>
+  </head>
+  <!-- body 要素 -->
+  <body>
+    <!-- 共通ヘッダー -->
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
+
+    <!-- 画面全体のラッパー -->
+    <div class="wrap">
+      <!-- レイアウト用グリッド -->
+      <div class="grid">
+        <!-- 正常メッセージ表示領域 -->
+        <div th:if="${msg != null}" class="msg" th:text="${msg}"></div>
+
+        <!-- エラーメッセージ表示領域 -->
+        <div th:if="${err != null}" class="err" th:text="${err}"></div>
+
+        <!-- メインカード -->
+        <section class="card">
+          <!-- 画面見出し -->
+          <h1 class="title" th:text="#{ui.mypage_admin_hashtag_master.002}">
+            ハッシュタグ一覧（マスタ）登録（NEWS_MGR：ニュース管理ロール）
+          </h1>
+
+          <!-- 新規ハッシュタグ登録フォーム -->
+          <form th:action="@{/mypage/admin/hashtag/master/create}" method="post" style="margin-top: 10px">
+            <!-- ハッシュタグ名入力行 -->
+            <div class="row">
+              <!-- 入力ラベル -->
+              <label th:text="#{ui.mypage_admin_hashtag_master.003}">ハッシュタグ名</label>
+
+              <!--
+                ハッシュタグ名入力欄
+                - 先頭の # は不要
+                - 最大10文字
+                - 必須入力
+              -->
+              <label>
+                <!-- テキスト入力欄 -->
+                <input
+                        name="name"
+                        type="text"
+                        placeholder="例: economy（#は不要）"
+                        maxlength="10"
+                        required
+                        th:attr="placeholder=#{ui.mypage_admin_hashtag_master.008}"
+                />
+              </label>
+            </div>
+
+            <!-- 登録ボタン -->
+            <div class="actions">
+              <!-- 操作ボタン -->
+              <button class="btn" type="submit" th:text="#{ui.mypage_admin_hashtag_master.004}">登録</button>
+            </div>
+
+            <!-- 入力時・運用時の注意事項 -->
+            <div class="hint">
+              ※ 同一ハッシュタグ（大文字小文字無視）は登録できません。<br />
+              ※ ニュース作成時は「有効なハッシュタグ」からのみ選択できます。<br />
+              ※ 既存ニュースに登録済みのハッシュタグは無効にできません。
+            </div>
+          </form>
+
+          <!-- 登録済みハッシュタグ一覧 -->
+          <div style="margin-top: 18px">
+            <!-- 一覧見出し -->
+            <div class="small" style="margin-bottom: 6px" th:text="#{ui.mypage_admin_hashtag_master.005}">
+              登録済み一覧
+            </div>
+
+            <!-- 一覧が空の場合のメッセージ -->
+            <div class="small" th:if="${hashtags == null or #lists.isEmpty(hashtags)}" th:text="#{ui.mypage_admin_hashtag_master.006}">
+              （まだ登録がありません）
+            </div>
+
+            <!-- 一覧が存在する場合のみテーブル表示 -->
+            <table th:if="${hashtags != null and !#lists.isEmpty(hashtags)}">
+              <!-- テーブルヘッダー -->
+              <thead>
+              <tr>
+                <!-- ハッシュタグ名列 -->
+                <th th:text="#{ui.mypage_admin_hashtag_master.007}">ハッシュタグ名</th>
+
+                <!-- 状態列 -->
+                <th th:text="#{mypage.label.status}">状態</th>
+
+                <!-- 操作列 -->
+                <th th:text="#{user.role.th.action}">操作</th>
+              </tr>
+              </thead>
+              <!-- テーブル本体 -->
+              <tbody>
+              <!-- ハッシュタグ一覧を1件ずつ表示 -->
+              <tr th:each="hashtag : ${hashtags}">
+                <!--
+                  ハッシュタグ名表示
+                  - 画面上では # を付与して表示
+                  - 長い場合は省略表示
+                -->
+                <td style="max-width: 640px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"
+                    th:text="${'#' + hashtag.name}"
+                >
+                  #sample
+                </td>
+
+                <!-- 有効/無効 状態表示 -->
+                <td>
+                  <!-- 有効時バッジ -->
+                  <span th:if="${hashtag.enabled}" class="badge badge-on" th:text="#{common.enabled}">
+                    有効
+                  </span>
+                  <!-- 無効時バッジ -->
+                  <span th:if="${!hashtag.enabled}" class="badge badge-off" th:text="#{common.disabled}">
+                    無効
+                  </span>
+                </td>
+
+                <!-- 有効/無効 切替操作 -->
+                <td>
+                  <!-- 送信フォーム -->
+                  <form th:action="@{/mypage/admin/hashtag/master/enabled}" method="post" style="display: inline">
+                    <!-- 対象ハッシュタグID -->
+                    <input type="hidden" name="id" th:value="${hashtag.id}" />
+
+                    <!-- 切替後の有効状態 -->
+                    <input type="hidden" name="enabled" th:value="${hashtag.enabled} ? 'false' : 'true'" />
+
+                    <!-- CSRF トークン -->
+                    <input
+                            type="hidden"
+                            th:if="${_csrf != null}"
+                            th:name="${_csrf.parameterName}"
+                            th:value="${_csrf.token}"
+                    />
+
+                    <!-- 操作ボタン -->
+                    <button
+                            type="submit"
+                            th:class="${hashtag.enabled} ? 'btn' : 'btn btn-on'"
+                            th:text="${hashtag.enabled} ? '無効にする' : '有効にする'"
+                    >
+                      切替
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 戻る操作 -->
+          <div class="row-actions">
+            <!-- 画面遷移リンク -->
+            <a class="btn link" th:href="@{/mypage}" th:text="#{common.back_to_mypage}">
+              各機能ページ一覧へ戻る
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
